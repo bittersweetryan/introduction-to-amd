@@ -9,5 +9,6 @@
  * What Is RequireJS
  * data-main
  * config
- * adding libraries that are not AMD compliant  
+ * adding libraries that are not AMD compliant
+ * optimization with r.js  
     	
