@@ -16,6 +16,8 @@
  * configuring Require
    * baseUrl
    * paths
+ * Including templates using the !text plugin
+ * Including stylesheets
  * Adding libraries that are not AMD compliant
  * Optimization with r.js  
  * Other AMD Loaders
