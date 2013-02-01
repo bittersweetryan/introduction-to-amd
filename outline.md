@@ -4,11 +4,12 @@
  * Agenda
  * Why AMD
  * Writing AMD Compliant Modules
-   * require() function
    * define() function
- * What Is RequireJS
+ * Introducing RequireJS
+ * configuring Require
+   * baseUrl
+   * paths
  * data-main
- * config
- * adding libraries that are not AMD compliant
- * optimization with r.js  
+ * Adding libraries that are not AMD compliant
+ * Optimization with r.js  
     	

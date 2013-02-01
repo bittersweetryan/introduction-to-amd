@@ -24,15 +24,22 @@
 	<!-- Transition theme. More available in /themes/transition/ or create your own. -->
 	<link rel="stylesheet" href="themes/transition/horizontal-slide.css">
 	
+	<!-- presentation -->
+	<link rel="stylesheet" type="text/css" href="presentation.css">
+
 	<!-- Required Modernizr file -->
 	<script src="modernizr.custom.js"></script>
 </head>
-<body class="deck-container">
+<body class="deck-container" onload="prettyPrint()">
 
 <!-- Begin slides. Just make elements with a class of slide. -->
 
 <section class="slide">
-	<h1>Slide</h1>
+	<h1>AMD & RequireJS</h1>
+	<div id="subtitle">
+		<h4>cf.Objective() 2013</h4>
+	</div>
+	<div class="amd-title"></div>
 </section>
 
 <section class="slide">
@@ -85,6 +92,9 @@
 <script src="extensions/status/deck.status.js"></script>
 <script src="extensions/navigation/deck.navigation.js"></script>
 <script src="extensions/scale/deck.scale.js"></script>
+
+<link href="lib/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="lib/google-code-prettify/prettify.js"></script>
 
 <!-- Initialize the deck. You can put this in an external file if desired. -->
 <script>
