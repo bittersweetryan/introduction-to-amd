@@ -19,6 +19,9 @@
  * Including templates using the !text plugin
  * Including stylesheets
  * Adding libraries that are not AMD compliant
+ * Things to watch out for
+   * Circular references
+   * load order in main.js
  * Optimization with r.js  
  * Other AMD Loaders
    * cujo.js
