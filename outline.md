@@ -4,6 +4,10 @@
  * Agenda
  * Why AMD
  	* dependency management
+ 		*the early days (embedded scripts)
+ 		*script tags
+ 		*IIFE
+ 		*AMD
  	* no global variables
  	* no need for multiple script tags
  	* code organization
@@ -17,9 +21,12 @@
    * baseUrl
    * paths
  * Adding libraries that are not AMD compliant
+ * Things to look out for
  * Optimization with r.js  
  * Other AMD Loaders
    * cujo.js
+ * The future of modules
+ 	* harmony
  * Resources
  * Questions
     	

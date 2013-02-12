@@ -1,53 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=1024, user-scalable=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
 
-	<title>Your deck.js Presentation</title>
-	
-	<!-- Required stylesheet -->
-	<link rel="stylesheet" href="core/deck.core.css">
-	
-	<!-- Extension CSS files go here. Remove or add as needed. -->
-	<link rel="stylesheet" href="extensions/goto/deck.goto.css">
-	<link rel="stylesheet" href="extensions/menu/deck.menu.css">
-	<link rel="stylesheet" href="extensions/navigation/deck.navigation.css">
-	<link rel="stylesheet" href="extensions/status/deck.status.css">
-	<link rel="stylesheet" href="extensions/hash/deck.hash.css">
-	<link rel="stylesheet" href="extensions/scale/deck.scale.css">
+    <title>Introduction to AMD with RequireJS</title>
+    
+    <!-- Required stylesheet -->
+    <link rel="stylesheet" href="core/deck.core.css">
+    
+    <!-- Extension CSS files go here. Remove or add as needed. -->
+    <link rel="stylesheet" href="extensions/goto/deck.goto.css">
+    <link rel="stylesheet" href="extensions/menu/deck.menu.css">
+    <link rel="stylesheet" href="extensions/navigation/deck.navigation.css">
+    <link rel="stylesheet" href="extensions/status/deck.status.css">
+    <link rel="stylesheet" href="extensions/hash/deck.hash.css">
+    <link rel="stylesheet" href="extensions/scale/deck.scale.css">
 
-	<!-- Style theme. More available in /themes/style/ or create your own. -->
-	<link rel="stylesheet" href="themes/style/swiss.css">
-	
-	<!-- Transition theme. More available in /themes/transition/ or create your own. -->
-	<link rel="stylesheet" href="themes/transition/horizontal-slide.css">
-	
-	<!-- presentation -->
-	<link rel="stylesheet" type="text/css" href="presentation.css">
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" href="themes/style/swiss.css">
+    
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" href="themes/transition/horizontal-slide.css">
+    
+    <!-- presentation -->
+    <link rel="stylesheet" type="text/css" href="presentation.css">
 
-	<!-- Required Modernizr file -->
-	<script src="modernizr.custom.js"></script>
+    <!-- Required Modernizr file -->
+    <script src="modernizr.custom.js"></script>
 </head>
 <body class="deck-container" onload="prettyPrint()">
 
 <!-- Begin slides. Just make elements with a class of slide. -->
 
 <section class="slide">
-	<h1>AMD & RequireJS</h1>
-	<div id="subtitle">
-		<h4>cf.Objective() 2013</h4>
-	</div>
-	<div class="amd-title"></div>
+    <h1>AMD & RequireJS</h1>
+    <div id="subtitle">
+        <h4>MilwaukeeJS</h4>
+    </div>
+    <div class="amd-title"></div>
 </section>
 
 <section class="slide">
-	<h1>Content</h1>
+    <h2>Who Am I</h2>
+    <ul>
+        <li>Front End Engineer at Northwestern Mutual</li>
+        <li>Web Developer since 1997</li>
+        <li>Active Githubber</li>
+        <li>bittersweetryan</li>
+    </ul>
 </section>
 
 <section class="slide">
-	<h1>Here</h1>
+    <h2>Agenda</h2>
+    <ul>
+        <li>Why AMD</li>
+        <li>Writing AMD Modules</li>
+        <li>Introducing RequireJS</li>
+        <li>Things to Look Out For</li>
+        <li>Optimization With r.js</li>
+        <li>The Future of Modules</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h1>Why AMD?</h1>
+</section>
+
+<section class="slide">
+    <h2>The beginning...</h2>
+<pre class="prettyprint">
+&lt;img src=&quot;link1.jpg&quot; onmouseover=&quot;this.src=&#39;link1_over.jpg&#39;&quot; onmouseout=&quot;this.src=&#39;link1.jpg&#39;&quot;&gt;
+
+&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;alert(&#39;Are you sure.&#39;)&quot;&gt;Click Me&lt;/a&gt;
+</pre>
+</section>
+
+<section class="slide">
+    <h2>The middle...</h2>
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot;&gt;
+    function OnMouseOver(image, newSrc){
+        image.src = newSrc;
+    }
+&lt;/script&gt;
+
+&lt;img src=&quot;link1.jpg&quot; onmouseover=&quot;OnMouseOver(this, &#39;link1_over.jpg&#39;)&quot; onmouseout=&quot;OnMouseOver(this, &#39;link1.jpg&#39;)&quot;&gt;
+</pre>
+</section>
+
+<section class="slide">
+    <h2>The not so distant past...</h1>
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot; src=&quot;the.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;bears.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;still.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;suck.js&quot;&gt;&lt;/script&gt;
+</pre>
+</section>
+
+<section class="slide">
+    <h2>The not so distant past...</h1>
+    <p>Then a designer from Kenosha who is a Bears edits your page...</p>
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot; src=&quot;still.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;suck.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;the.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;bears.js&quot;&gt;&lt;/script&gt;
+</pre>
+    <p>And breaks EVERYTHING!</p>
+</section>
+
+<section class="slide">
+    <h2>The present...</h2>
+    <h3>RequireJS to the Rescue!</h3>
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot; data-main=&quot;js/main.js&quot; src=&quot;js/vendor/require.js&quot;&gt;&lt;/script&gt;
+</pre>
+</section>
+
+<section class="slide">
+    <h2>But Wait, Theres More!</h2>
+    <ul>
+        <li>No globals!  Everything is wrapped up in modules.</li>
+        <li>Scripts are loaded asyncronously, no script tags blocking</li>
+        <li>Lots of libraries support it out of the box</li>
+    </ul>
 </section>
 
 <!-- End slides. -->
@@ -61,17 +140,17 @@
 
 <!-- deck.status snippet -->
 <p class="deck-status">
-	<span class="deck-status-current"></span>
-	/
-	<span class="deck-status-total"></span>
+    <span class="deck-status-current"></span>
+    /
+    <span class="deck-status-total"></span>
 </p>
 
 <!-- deck.goto snippet -->
 <form action="." method="get" class="goto-form">
-	<label for="goto-slide">Go to slide:</label>
-	<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
-	<datalist id="goto-datalist"></datalist>
-	<input type="submit" value="Go">
+    <label for="goto-slide">Go to slide:</label>
+    <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+    <datalist id="goto-datalist"></datalist>
+    <input type="submit" value="Go">
 </form>
 
 <!-- deck.hash snippet -->
@@ -98,9 +177,9 @@
 
 <!-- Initialize the deck. You can put this in an external file if desired. -->
 <script>
-	$(function() {
-		$.deck('.slide');
-	});
+    $(function() {
+        $.deck('.slide');
+    });
 </script>
 </body>
 </html>
