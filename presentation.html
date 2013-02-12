@@ -36,10 +36,12 @@
 
 <section class="slide">
     <h1>AMD & RequireJS</h1>
-    <div id="subtitle">
-        <h4>MilwaukeeJS</h4>
+    
+    <div class="amd-title">
+        <div id="subtitle">
+            <h4>MilwaukeeJS</h4>
+        </div>
     </div>
-    <div class="amd-title"></div>
 </section>
 
 <section class="slide">
@@ -91,7 +93,7 @@
 </section>
 
 <section class="slide">
-    <h2>The not so distant past...</h1>
+    <h2>The not so distant past...</h2>
 <pre class="prettyprint">
 &lt;script type=&quot;text/javascript&quot; src=&quot;the.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;bears.js&quot;&gt;&lt;/script&gt;
@@ -101,7 +103,7 @@
 </section>
 
 <section class="slide">
-    <h2>The not so distant past...</h1>
+    <h2>The not so distant past...</h2>
     <p>Then a designer from Kenosha who is a Bears edits your page...</p>
 <pre class="prettyprint">
 &lt;script type=&quot;text/javascript&quot; src=&quot;still.js&quot;&gt;&lt;/script&gt;
@@ -125,10 +127,63 @@
     <ul>
         <li>No globals!  Everything is wrapped up in modules.</li>
         <li>Scripts are loaded asyncronously, no script tags blocking</li>
+        <li>Dependencies are well defined and injected into modules</li>
+        <li>Helps promote organization and resue by breaking your code into small, specialized files</li>
         <li>Lots of libraries support it out of the box</li>
     </ul>
 </section>
 
+<section class="slide">
+    <h1>Writing AMD Modules</h1>
+</section>
+
+<section class="slide">
+    <h2>The AMD Spec</h2>
+    <p>The Asynchronous Module Definition (**AMD**) API specifies a mechanism for defining modules such that the module and its dependencies can be asynchronously loaded. This is particularly well suited for the browser environment where synchronous loading of modules incurs performance, usability, debugging, and cross-domain access problems.
+    </p>
+</section>
+
+<section class="slide">
+    <h2>define( )</h2>
+<pre class="prettyprint">
+define( [ id, ] [ dependencies , ] factory );
+</pre>
+    <ul>
+        <li><strong>id</strong> &lt;string&gt; - The optional ID to be assigned to the module.  If no ID is passed will be the name of the .js file.</li>
+        <li><strong>dependencies</strong> &lt;array literal&gt; - The optional list of dependencies.  When id is ommited from a module then its relative path.</li>
+        <li><strong>factory</strong> &lt;function&gt; - The function that initiates your module.  Whatever the factory returns is assigned to the module</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>The simplest module</h2>
+<pre class="prettyprint">
+define( function( ){ 
+
+    console.log( 'hello world' );
+} );
+</pre>
+</section>
+
+<section class="slide">
+    <h2>A little more practical example</h2>
+<pre class="prettyprint">
+define( 'navView',
+        [
+            jquery,
+            underscore,
+            backbone
+        ],
+        function( $, _, Backbone){
+        'use strict';
+
+        var navView = Backbone.View.extend( { ... } );
+
+        return navView;
+    }
+);
+</pre>
+</section>
 <!-- End slides. -->
 
 
