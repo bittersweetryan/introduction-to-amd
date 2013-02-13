@@ -168,20 +168,94 @@ define( function( ){
 <section class="slide">
     <h2>A little more practical example</h2>
 <pre class="prettyprint">
-define( 'navView',
+define( &#39;navView&#39;,
         [
             jquery,
             underscore,
             backbone
         ],
         function( $, _, Backbone){
-        'use strict';
+        &#39;use strict&#39;;
 
         var navView = Backbone.View.extend( { ... } );
 
         return navView;
     }
 );
+</pre>
+</section>
+
+<section class="slide">
+    <h1>RequireJS </h1>
+</section>
+
+<section class="slide">
+    <h2>RequireJS</h2>
+    <p>Lets take a look at how RequireJS brings AMD into our web apps.</p>
+</section>
+
+<section class="slide">
+    <h2>RequireJS</h2>
+    <h3>The Simplest Implementation.</h3>
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot; data-main=&quot;main&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
+</pre>
+<p>Pay close attention to the <code>data-main</code> attribute!</p>
+<p>This tells require to run the main.js to initialize the application.</p>
+</section>
+
+<section class="slide">
+    <h2>Inside main.js</h2>
+<pre class="prettyprint">
+require( [ &#39;app&#39; ], function( app ){
+
+    app.init( );
+} );
+</pre>
+    <p>The <code>require</code> function is used as a shortcut by RequireJS when a script has no exports.</p>
+    <p>app.js can have its own dependencies that will be resolved when it is included into main script.</p>
+</section>
+
+<section class="slide">
+    <h2>Configuring Require</h2>
+<pre class="prettyprint">
+require.config( {
+    baseUrl : &#39;&#39;,
+    paths : { },
+    shim: { }, //added in RequireJS 2.1.0 and is full of win
+    map : {},
+    config : {},
+    waitSeconds : 7,
+    deps : []
+} );
+</pre>
+    <p>To see all config options go to the require website: <a href="http://requirejs.org" target="_blank">requirejs.org</a></p>
+</section>
+
+<section class="slide">
+    <h2>Config Options</h2>
+    <ul>
+        <li>baseURL : </li>
+        <li>paths : </li>
+        <li>shim : </li>
+        <li>map : </li>
+        <li>config : </li>
+        <li>waitSeconds : </li>
+        <li>deps : </li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Common pattern for config</h2>
+    <p>index.html</p>
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot; data-main=&quot;config&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
+</pre>
+    <p>config.js</p>
+<pre class="prettyprint">
+require.config( {
+    deps : [ &#39;main&#39; ]
+} );
 </pre>
 </section>
 <!-- End slides. -->

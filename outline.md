@@ -20,8 +20,12 @@
  * configuring Require
    * baseUrl
    * paths
+   * referencing files by relative paths.
  * Adding libraries that are not AMD compliant
- * Things to look out for
+ * Best Pracitces & Things to look out for
+    * One module per file
+    * use require.toURL() to create url's relative to a module
+    * Circular dependencies
  * Optimization with r.js  
  * Other AMD Loaders
    * cujo.js
