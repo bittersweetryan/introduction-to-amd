@@ -258,6 +258,73 @@ require.config( {
 } );
 </pre>
 </section>
+    
+<section class="slide">
+    <h1>Adding Non-AMD Modules</h1>    
+</section>
+    
+<section class="slide">
+    <h2>shim</h2>
+<pre class="prettyprint">
+paths : {
+    underscore : &#39;vendor/underscore&#39;,
+    backbone : &#39;vendor/backgbone&#39;
+},
+
+shim : {
+    backbone : {
+        deps : [ &#39;jquery&#39; ]
+    }
+}
+</pre>
+</section>
+
+<section class="slide">
+    <h1>Things to Look Out For</h1>
+</section>
+
+<section class="slide">
+    <h2>Best Practice</h2>
+    <h3>One Module Per File</h3>
+<pre class="prettyprint">
+define( 'userModel' , [ 'underscore', 'backbone' ], function(){
+    ...
+} );
+
+define( 'userView' , [ 'userModel', underscore', 'backbone' ], function(){
+    ...
+} );
+</pre>
+</section>
+
+<section class="slide">
+    <h2>Thing to Look Out For</h2>
+    <h3>Circular Dependencies</h3>
+<p>a.js</p>
+<pre class="prettyprint">
+define( [ 'b' ], function(){
+    ...
+} );
+</pre>
+<p>b.js</p>
+<pre class="prettyprint">
+define( [ 'a' ], function(){
+    ...
+} );
+</pre>
+</section>
+
+<section class="slide">
+    <h1>Optimization With R.js</h1>
+</section>
+
+<section class="slide">
+    <h2>What Is It?</h2>
+    <ul>
+        <li>Combines and minifies .js files</li>
+        <li>Optimizes CSS</li>
+    </ul>
+</section>
 <!-- End slides. -->
 
 
