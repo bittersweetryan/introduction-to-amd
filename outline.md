@@ -27,10 +27,9 @@
     * use require.toURL() to create url's relative to a module
     * Circular dependencies
  * Optimization with r.js  
- * Other AMD Loaders
-   * cujo.js
  * The future of modules
  	* harmony
+ 	*umd (Universal Module Definition)
  * Resources
  * Questions
     	
