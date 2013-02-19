@@ -23,8 +23,11 @@
    * Circular references
    * load order in main.js
  * Optimization with r.js  
+   * simple project
+   * with shims
+   * multiple page application
  * Other AMD Loaders
-   * cujo.js
+   * curl.js
  * Resources
  * Questions
     	
