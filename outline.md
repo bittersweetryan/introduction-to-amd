@@ -26,10 +26,15 @@
     * One module per file
     * use require.toURL() to create url's relative to a module
     * Circular dependencies
- * Optimization with r.js  
+ * Optimization with r.js 
+    * simple project
+    * with config
+      * shims 
+    * multiple page project
+    * adding optimized file back into project
  * The future of modules
  	* harmony
- 	*umd (Universal Module Definition)
+ 	* umd (Universal Module Definition)
  * Resources
  * Questions
     	

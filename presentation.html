@@ -235,13 +235,13 @@ require.config( {
 <section class="slide">
     <h2>Config Options</h2>
     <ul>
-        <li>baseURL : </li>
+        <li>baseURL : The base url for your scripts.  This is where require will resolve dependencies from.</li>
         <li>paths : </li>
-        <li>shim : </li>
+        <li>shim : Bring in libraries that are NOT AMD libraries (Backbone & Underscore).</li>
         <li>map : </li>
-        <li>config : </li>
-        <li>waitSeconds : </li>
-        <li>deps : </li>
+        <li>config : An object of configuration variables that other modules can access via config( 'prop' )</li>
+        <li>waitSeconds : The number of seconds to wait before running the data-main module.</li>
+        <li>deps : Files that should be loaded after the confg has been set (usually your main.js file).</li>
     </ul>
 </section>
 
@@ -268,19 +268,37 @@ require.config( {
 <pre class="prettyprint">
 paths : {
     underscore : &#39;vendor/underscore&#39;,
-    backbone : &#39;vendor/backgbone&#39;
+    backbone : &#39;vendor/backbone&#39;,
+    jquery : &#39;vendor/jquery-1.9.1&#39;
 },
 
 shim : {
     backbone : {
-        deps : [ &#39;jquery&#39; ]
+        deps : [ &#39;underscore&#39;, &#39;jquery&#39; ]
     }
 }
 </pre>
 </section>
 
 <section class="slide">
-    <h1>Things to Look Out For</h1>
+    <h2>shimming plugins</h2>
+<pre class="prettyprint">
+paths : {
+    jquery : &#39;vendor/jquery-1.9.1&#39;,
+    'jquery.validation' : &#39;vendor/jquery.validate.js&#39;,
+},
+
+shim : {
+    'jquery.validation' : {
+        deps : [ &#39;jquery&#39; ],
+        exports : 'jQuery.fn.validate' //checks of module is loaded
+    }
+}
+</pre>
+</section>
+
+<section class="slide">
+    <h1>Best Practices & Gotchas</h1>
 </section>
 
 <section class="slide">
@@ -298,7 +316,7 @@ define( 'userView' , [ 'userModel', underscore', 'backbone' ], function(){
 </section>
 
 <section class="slide">
-    <h2>Thing to Look Out For</h2>
+    <h2>Things to Look Out For</h2>
     <h3>Circular Dependencies</h3>
 <p>a.js</p>
 <pre class="prettyprint">
@@ -337,7 +355,36 @@ define( [ 'a' ], function(){
 </section>
 
 <section class="slide">
-    <h2>Running R.js</h2>
+    <h2>Build Options</h2>
+    <ul>
+        <li>command line options</li>
+        <li>build.js</li>
+    </ul>
+    <p>build.js</p>
+<pre class="prettyprint">
+({
+    appDir : '.', //assumes r.js is running in the root of your app
+    baseUrl : 'js', //all modules are loaded relative to this path
+    dir : 'build', //directory to save output
+    out : 'main-min.js' //name of the optimized file
+    paths : { } //mappings to other paths in your app
+    name : 'main' //
+    
+})
+</pre>
+</section>
+
+<section class="slide">
+    <h2>Build For Multi Page Site</h2>
+<pre class="prettyprint">
+({
+    appDir : '.', //assumes r.js is running in the root of your app
+    baseUrl : 'js', //all modules are loaded relative to this path
+    dir : 'build', //directory to save output
+    out : 'main-min.js' //name of the optimized file
+    
+})
+</pre>
 </section>
 <!-- End slides. -->
 
