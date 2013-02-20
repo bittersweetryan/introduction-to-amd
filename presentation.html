@@ -373,13 +373,13 @@ define( [ 'a' ], function(){
     <p>build.js</p>
 <pre class="prettyprint">
 ({
-    appDir : '.', //assumes r.js is running in the root of your app
     baseUrl : 'js', //all modules are loaded relative to this path
     dir : 'build', //directory to save output
     out : 'main-min.js' //name of the optimized file
-    paths : { } //mappings to other paths in your app
+    paths : { } //mappings to other paths in your app !be sure to copy these from config!
+    shim : { } //libraries that expose globals ! be sure to copy these from config!
     name : 'main' //
-    
+    optimize : 'none | uglify | closure'
 })
 </pre>
 </section>
