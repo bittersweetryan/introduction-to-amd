@@ -35,7 +35,7 @@
 <!-- Begin slides. Just make elements with a class of slide. -->
 
 <section class="slide">
-    <h1>AMD & RequireJS</h1>
+    <h1>AMD &amp; RequireJS</h1>
     
     <div class="amd-title">
         <div id="subtitle">
@@ -95,13 +95,13 @@
 <section class="slide">
     <h2>The not so distant past...</h2>
 <pre class="prettyprint">
-&lt;script type=&quot;text/javascript&quot; src=&quot;the.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;da.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;bears.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;still.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;suck.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;so.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;do.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;tha.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;the.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;cubs.js&quot;&gt;&lt;/script&gt;
 </pre>
 </section>
@@ -130,10 +130,10 @@
     <h2>But Wait, Theres More!</h2>
     <ul>
         <li>No globals!  Everything is wrapped up in modules.</li>
-        <li>Scripts are loaded asyncronously, no script tags blocking</li>
+        <li>Scripts are loaded asyncronously, no script tags blocking UI, more than 1 script can be loaded at once</li>
         <li>Dependencies are well defined and injected into modules</li>
-        <li>Helps promote organization and resue by breaking your code into small, specialized files</li>
-        <li>Lots of libraries support it out of the box</li>
+        <li>Helps promote code organization and resue by breaking your code into small, modularized files</li>
+        <li>Lots of libraries support it, and there is built in support for ones that do not.</li>
     </ul>
 </section>
 
@@ -145,12 +145,15 @@
     <h2>The AMD Spec</h2>
     <p>The Asynchronous Module Definition (**AMD**) API specifies a mechanism for defining modules such that the module and its dependencies can be asynchronously loaded. This is particularly well suited for the browser environment where synchronous loading of modules incurs performance, usability, debugging, and cross-domain access problems.
     </p>
+    <p>
+        <a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank">https://github.com/amdjs/amdjs-api/wiki/AMD</a>
+    </p>
 </section>
 
 <section class="slide">
     <h2>define( )</h2>
 <pre class="prettyprint">
-define( [ id, ] [ dependencies , ] factory );
+define( < id, > < [ dependencies ], > factory );
 </pre>
     <ul>
         <li><strong>id</strong> &lt;string&gt; - The optional ID to be assigned to the module.  If no ID is passed will be the name of the .js file.</li>
@@ -167,6 +170,10 @@ define( function( ){
     console.log( 'hello world' );
 } );
 </pre>
+    <ul>
+        <li>No dependencies</li>
+        <li>No id, module id will be the script name minus the .js</li>
+    </ul>
 </section>
 
 <section class="slide">
@@ -398,6 +405,85 @@ define( [ 'a' ], function(){
     out : 'main-min.js' //name of the optimized file
     
 })
+</pre>
+</section>
+
+<section class="slide">
+    <h2>Why not AMD?</h2>
+    <ul>
+        <li>Dependencies are defined as strings.</li>
+        <li>Without a build process encourages many http requests.</li>
+        <li>Extra Markup</li>
+        <li>Not compatable with Harmony Modules</li>
+    </ul>
+    <p>
+    <a href="http://tomdale.net/2012/01/amd-is-not-the-answer/">Why AMD is Not the Answer</a> by  Tom Dale, one of the Ember.js creators.
+    </p>
+</section>
+
+<section class="slide">
+    <h1>The Future</h1>
+</section>
+
+<section class="slide">
+    <h2>ES Harmony Modules</h2>
+    <h4 class="warn">Warning! The spec is still in process</h4>
+    <p>3 new keywords</p>
+    <ul>
+        <li>
+            <code class="prettyprint">module</code>
+        </li>
+        <li>
+            <code class="prettyprint">import</code>
+        </li>
+        <li>
+            <code class="prettyprint">export</code>
+        </li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Using module and export</h2>
+<pre class="prettyprint">
+module person{
+    var name = ''; //private
+
+    export function sayHello(){
+        return 'Hello, ' + name;
+    }
+}
+</pre>
+</section>
+
+<section class="slide">
+    <h2>Multiple exports</h2>
+<pre class="prettyprint">
+module cars{
+
+    export var ford = {
+        make : 'Ford'
+    };
+
+    export var chevy = {
+        make : 'Chevrolet'
+    };
+}
+</pre>
+</section>
+
+<section class="slide">
+    <h2>import</h2>
+<pre class="prettyprint">
+module fusion{
+    
+    import car.ford;
+
+    var model = 'Fusion';
+
+    export function getFullName(){
+        return car.make + ' ' + model;
+    }
+}
 </pre>
 </section>
 <!-- End slides. -->

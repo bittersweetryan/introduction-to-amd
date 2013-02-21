@@ -16,3 +16,7 @@
 	margin-top: 45%;
 	position: relative;
 }
+
+.warn{
+	color: red;
+}
