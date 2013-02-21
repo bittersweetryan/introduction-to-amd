@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+
+    <title>Introduction to AMD with RequireJS</title>
+    
+    <!-- Required stylesheet -->
+    <link rel="stylesheet" href="core/deck.core.css">
+    
+    <!-- Extension CSS files go here. Remove or add as needed. -->
+    <link rel="stylesheet" href="extensions/goto/deck.goto.css">
+    <link rel="stylesheet" href="extensions/menu/deck.menu.css">
+    <link rel="stylesheet" href="extensions/navigation/deck.navigation.css">
+    <link rel="stylesheet" href="extensions/status/deck.status.css">
+    <link rel="stylesheet" href="extensions/hash/deck.hash.css">
+    <link rel="stylesheet" href="extensions/scale/deck.scale.css">
+
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" href="themes/style/swiss.css">
+    
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" href="themes/transition/horizontal-slide.css">
+    
+    <!-- presentation -->
+    <link rel="stylesheet" type="text/css" href="presentation.css">
+
+    <!-- Required Modernizr file -->
+    <script src="modernizr.custom.js"></script>
+</head>
+<body class="deck-container" onload="prettyPrint()">
+
+<!-- Begin slides. Just make elements with a class of slide. -->
+
+<section class="slide">
+    <h1>AMD & RequireJS</h1>
+    
+    <div class="amd-title">
+        <div id="subtitle">
+            <h4>MilwaukeeJS</h4>
+        </div>
+    </div>
+</section>
+
+<section class="slide">
+    <h2>Who Am I</h2>
+    <ul>
+        <li>Front End Engineer at Northwestern Mutual</li>
+        <li>Web Developer since 1997</li>
+        <li>Active Githubber</li>
+        <li>bittersweetryan</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Agenda</h2>
+    <ul>
+        <li>Why AMD</li>
+        <li>Writing AMD Modules</li>
+        <li>Introducing RequireJS</li>
+        <li>Things to Look Out For</li>
+        <li>Optimization With r.js</li>
+        <li>The Future of Modules</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h1>Why AMD?</h1>
+</section>
+
+<section class="slide">
+    <h2>The beginning...</h2>
+<pre class="prettyprint">
+&lt;img src=&quot;link1.jpg&quot; onmouseover=&quot;this.src=&#39;link1_over.jpg&#39;&quot; onmouseout=&quot;this.src=&#39;link1.jpg&#39;&quot;&gt;
+
+&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;alert(&#39;Are you sure.&#39;)&quot;&gt;Click Me&lt;/a&gt;
+</pre>
+</section>
+
+<section class="slide">
+    <h2>The middle...</h2>
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot;&gt;
+    function OnMouseOver(image, newSrc){
+        image.src = newSrc;
+    }
+&lt;/script&gt;
+
+&lt;img src=&quot;link1.jpg&quot; onmouseover=&quot;OnMouseOver(this, &#39;link1_over.jpg&#39;)&quot; onmouseout=&quot;OnMouseOver(this, &#39;link1.jpg&#39;)&quot;&gt;
+</pre>
+</section>
+
+<section class="slide">
+    <h2>The not so distant past...</h2>
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot; src=&quot;the.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;bears.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;still.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;suck.js&quot;&gt;&lt;/script&gt;
+</pre>
+</section>
+
+<section class="slide">
+    <h2>The not so distant past...</h2>
+    <p>Then a designer from Kenosha who is a Bears edits your page...</p>
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot; src=&quot;still.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;suck.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;the.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;bears.js&quot;&gt;&lt;/script&gt;
+</pre>
+    <p>And breaks EVERYTHING!</p>
+</section>
+
+<section class="slide">
+    <h2>The present...</h2>
+    <h3>RequireJS to the Rescue!</h3>
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot; data-main=&quot;js/main.js&quot; src=&quot;js/vendor/require.js&quot;&gt;&lt;/script&gt;
+</pre>
+</section>
+
+<section class="slide">
+    <h2>But Wait, Theres More!</h2>
+    <ul>
+        <li>No globals!  Everything is wrapped up in modules.</li>
+        <li>Scripts are loaded asyncronously, no script tags blocking</li>
+        <li>Dependencies are well defined and injected into modules</li>
+        <li>Helps promote organization and resue by breaking your code into small, specialized files</li>
+        <li>Lots of libraries support it out of the box</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h1>Writing AMD Modules</h1>
+</section>
+
+<section class="slide">
+    <h2>The AMD Spec</h2>
+    <p>The Asynchronous Module Definition (**AMD**) API specifies a mechanism for defining modules such that the module and its dependencies can be asynchronously loaded. This is particularly well suited for the browser environment where synchronous loading of modules incurs performance, usability, debugging, and cross-domain access problems.
+    </p>
+</section>
+
+<section class="slide">
+    <h2>define( )</h2>
+<pre class="prettyprint">
+define( [ id, ] [ dependencies , ] factory );
+</pre>
+    <ul>
+        <li><strong>id</strong> &lt;string&gt; - The optional ID to be assigned to the module.  If no ID is passed will be the name of the .js file.</li>
+        <li><strong>dependencies</strong> &lt;array literal&gt; - The optional list of dependencies.  When id is ommited from a module then its relative path.</li>
+        <li><strong>factory</strong> &lt;function&gt; - The function that initiates your module.  Whatever the factory returns is assigned to the module</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>The simplest module</h2>
+<pre class="prettyprint">
+define( function( ){ 
+
+    console.log( 'hello world' );
+} );
+</pre>
+</section>
+
+<section class="slide">
+    <h2>A little more practical example</h2>
+<pre class="prettyprint">
+define( &#39;navView&#39;,
+        [
+            jquery,
+            underscore,
+            backbone
+        ],
+        function( $, _, Backbone){
+        &#39;use strict&#39;;
+
+        var navView = Backbone.View.extend( { ... } );
+
+        return navView;
+    }
+);
+</pre>
+</section>
+
+<section class="slide">
+    <h1>RequireJS </h1>
+</section>
+
+<section class="slide">
+    <h2>RequireJS</h2>
+    <ul>
+        <li>
+            Open Source AMD Loader
+        </li>
+        <li>
+            Written and maintained by James Burke
+        </li>
+        <li>
+            <a href="http://requirejs.org" target="_blank">http://www.requirejs.org</a>
+        </li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>RequireJS</h2>
+    <h3>The Simplest Implementation.</h3>
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot; data-main=&quot;main&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
+</pre>
+<p>Pay close attention to the <code>data-main</code> attribute!</p>
+<p>This tells require to run the main.js to initialize the application.</p>
+</section>
+
+<section class="slide">
+    <h2>Inside main.js</h2>
+<pre class="prettyprint">
+require( [ &#39;app&#39; ], function( app ){
+
+    app.init( );
+} );
+</pre>
+    <p>The <code>require</code> function is used as a shortcut by RequireJS when a script has no exports.</p>
+    <p>app.js can have its own dependencies that will be resolved when it is included into main script.</p>
+</section>
+
+<section class="slide">
+    <h2>Configuring Require</h2>
+<pre class="prettyprint">
+require.config( {
+    baseUrl : &#39;&#39;,
+    paths : { },
+    shim: { }, //added in RequireJS 2.1.0 and is full of win
+    map : {},
+    config : {},
+    waitSeconds : 7,
+    deps : []
+} );
+</pre>
+    <p>To see all config options go to the require website: <a href="http://requirejs.org" target="_blank">requirejs.org</a></p>
+</section>
+
+<section class="slide">
+    <h2>Config Options</h2>
+    <ul>
+        <li>baseURL : The base url for your scripts.  This is where require will resolve dependencies from.</li>
+        <li>paths : </li>
+        <li>shim : Bring in libraries that are NOT AMD libraries (Backbone & Underscore).</li>
+        <li>map : </li>
+        <li>config : An object of configuration variables that other modules can access via config( 'prop' )</li>
+        <li>waitSeconds : The number of seconds to wait before running the data-main module.</li>
+        <li>deps : Files that should be loaded after the confg has been set (usually your main.js file).</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Common pattern for config</h2>
+    <p>index.html</p>
+<pre class="prettyprint">
+&lt;script type=&quot;text/javascript&quot; data-main=&quot;config&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
+</pre>
+    <p>config.js</p>
+<pre class="prettyprint">
+require.config( {
+    deps : [ &#39;main&#39; ]
+} );
+</pre>
+</section>
+    
+<section class="slide">
+    <h1>Adding Non-AMD Modules</h1>    
+</section>
+    
+<section class="slide">
+    <h2>shim</h2>
+<pre class="prettyprint">
+paths : {
+    underscore : &#39;vendor/underscore&#39;,
+    backbone : &#39;vendor/backbone&#39;,
+    jquery : &#39;vendor/jquery-1.9.1&#39;
+},
+
+shim : {
+    backbone : {
+        deps : [ &#39;underscore&#39;, &#39;jquery&#39; ]
+    }
+}
+</pre>
+</section>
+
+<section class="slide">
+    <h2>shimming plugins</h2>
+<pre class="prettyprint">
+paths : {
+    jquery : &#39;vendor/jquery-1.9.1&#39;,
+    'jquery.validation' : &#39;vendor/jquery.validate.js&#39;,
+},
+
+shim : {
+    'jquery.validation' : {
+        deps : [ &#39;jquery&#39; ],
+        exports : 'jQuery.fn.validate' //checks of module is loaded
+    }
+}
+</pre>
+</section>
+
+<section class="slide">
+    <h1>Best Practices & Gotchas</h1>
+</section>
+
+<section class="slide">
+    <h2>Best Practice</h2>
+    <h3>One Module Per File</h3>
+<pre class="prettyprint">
+define( 'userModel' , [ 'underscore', 'backbone' ], function(){
+    ...
+} );
+
+define( 'userView' , [ 'userModel', underscore', 'backbone' ], function(){
+    ...
+} );
+</pre>
+</section>
+
+<section class="slide">
+    <h2>Things to Look Out For</h2>
+    <h3>Circular Dependencies</h3>
+<p>a.js</p>
+<pre class="prettyprint">
+define( [ 'b' ], function(){
+    ...
+} );
+</pre>
+<p>b.js</p>
+<pre class="prettyprint">
+define( [ 'a' ], function(){
+    ...
+} );
+</pre>
+</section>
+
+<section class="slide">
+    <h1>Optimization With R.js</h1>
+</section>
+
+<section class="slide">
+    <h2>What Is It?</h2>
+    <ul>
+        <li>Combines and minifies .js files</li>
+        <li>Optimizes CSS</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Requirements</h2>
+    <ul>
+        <li>Node.js 0.4.0 or later</li>
+        <li>Java 1.6 or later</li>
+        <li>Any browser that supports ECMAScript 5 Array "extras"</li>
+    </ul>
+    <p>Node is the preferred environment in a CLI</p>
+</section>
+
+<section class="slide">
+    <h2>Build Options</h2>
+    <ul>
+        <li>command line options</li>
+        <li>build.js</li>
+    </ul>
+    <p>build.js</p>
+<pre class="prettyprint">
+({
+    baseUrl : 'js', //all modules are loaded relative to this path
+    dir : 'build', //directory to save output
+    out : 'main-min.js' //name of the optimized file
+    paths : { } //mappings to other paths in your app !be sure to copy these from config!
+    shim : { } //libraries that expose globals ! be sure to copy these from config!
+    name : 'main' //
+    optimize : 'none | uglify | closure'
+})
+</pre>
+</section>
+
+<section class="slide">
+    <h2>Build For Multi Page Site</h2>
+<pre class="prettyprint">
+({
+    appDir : '.', //assumes r.js is running in the root of your app
+    baseUrl : 'js', //all modules are loaded relative to this path
+    dir : 'build', //directory to save output
+    out : 'main-min.js' //name of the optimized file
+    
+})
+</pre>
+</section>
+<!-- End slides. -->
+
+
+<!-- Begin extension snippets. Add or remove as needed. -->
+
+<!-- deck.navigation snippet -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<!-- deck.status snippet -->
+<p class="deck-status">
+    <span class="deck-status-current"></span>
+    /
+    <span class="deck-status-total"></span>
+</p>
+
+<!-- deck.goto snippet -->
+<form action="." method="get" class="goto-form">
+    <label for="goto-slide">Go to slide:</label>
+    <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+    <datalist id="goto-datalist"></datalist>
+    <input type="submit" value="Go">
+</form>
+
+<!-- deck.hash snippet -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+<!-- End extension snippets. -->
+
+
+<!-- Required JS files. -->
+<script src="jquery-1.7.2.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="core/deck.core.js"></script>
+<script src="extensions/hash/deck.hash.js"></script>
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/goto/deck.goto.js"></script>
+<script src="extensions/status/deck.status.js"></script>
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/scale/deck.scale.js"></script>
+
+<link href="lib/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="lib/google-code-prettify/prettify.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+    $(function() {
+        $.deck('.slide');
+    });
+</script>
+</body>
+</html>
