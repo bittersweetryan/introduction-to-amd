@@ -350,6 +350,22 @@ shim : {
 </section>
 
 <section class="slide">
+    <h2>Require Plugins</h2>
+    <p>Add the plugin source to the base directory.</p>
+<pre class="prettyprint">
+require(
+    [
+        &#39;text!myViewTemplate.html&#39;
+    ],
+    function( template ){
+        ...
+    }
+});
+</pre>
+<p>Note the use of the <code>!</code>, this is the syntax for loading a plugin.</p>
+</section>
+
+<section class="slide">
     <h1>Best Practices & Gotchas</h1>
 </section>
 
