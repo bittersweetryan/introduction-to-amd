@@ -1,5 +1,5 @@
 .amd-title{
-	background-image : url('images/require.png');
+    background-image : url('images/require.png');
 	background-repeat: no-repeat;
 	background-position: center;
 	position: absolute;
@@ -19,4 +19,10 @@
 
 .warn{
 	color: red;
+}
+
+span.quote{
+	color: #888;
+	font-weight: bold;
+	font-size: 1.4em;
 }

@@ -49,8 +49,8 @@
     <ul>
         <li>Front End Engineer at Northwestern Mutual</li>
         <li>Web Developer since 1997</li>
-        <li>Active Githubber</li>
-        <li>bittersweetryan</li>
+        <li>Active Git Hubber</li>
+        <li>bittersweetryan (twitter | github | et.al.)</li>
     </ul>
 </section>
 
@@ -60,7 +60,6 @@
         <li>Why AMD</li>
         <li>Writing AMD Modules</li>
         <li>Introducing RequireJS</li>
-        <li>Things to Look Out For</li>
         <li>Optimization With r.js</li>
         <li>The Future of Modules</li>
     </ul>
@@ -71,7 +70,7 @@
 </section>
 
 <section class="slide">
-    <h2>The beginning...</h2>
+    <h2>The Beginning...</h2>
 <pre class="prettyprint">
 &lt;img src=&quot;link1.jpg&quot; onmouseover=&quot;this.src=&#39;link1_over.jpg&#39;&quot; onmouseout=&quot;this.src=&#39;link1.jpg&#39;&quot;&gt;
 
@@ -80,12 +79,12 @@
 </section>
 
 <section class="slide">
-    <h2>The middle...</h2>
+    <h2>The Middle...</h2>
 <pre class="prettyprint">
-&lt;script type=&quot;text/javascript&quot;&gt;
-    function OnMouseOver(image, newSrc){
-        image.src = newSrc;
-    }
+&lt;script&gt;
+   function OnMouseOver(image, newSrc){
+      image.src = newSrc;
+   }
 &lt;/script&gt;
 
 &lt;img src=&quot;link1.jpg&quot; onmouseover=&quot;OnMouseOver(this, &#39;link1_over.jpg&#39;)&quot; onmouseout=&quot;OnMouseOver(this, &#39;link1.jpg&#39;)&quot;&gt;
@@ -93,36 +92,62 @@
 </section>
 
 <section class="slide">
-    <h2>The not so distant past...</h2>
+    <h2>The Not So Distant Past...</h2>
 <pre class="prettyprint">
-&lt;script type=&quot;text/javascript&quot; src=&quot;da.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;bears.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;still.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;suck.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;so.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;do.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;the.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;cubs.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;da.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bears.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;still.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;suck.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;so.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;do.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;the.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;cubs.js&quot;&gt;&lt;/script&gt;
 </pre>
 </section>
 
 <section class="slide">
-    <h2>The not so distant past...</h2>
+    <h2>The Not So Distant Past...</h2>
     <p>Then a designer from Kenosha who is a Bears edits your page...</p>
 <pre class="prettyprint">
-&lt;script type=&quot;text/javascript&quot; src=&quot;still.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;suck.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;the.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;bears.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;still.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;suck.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;the.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bears.js&quot;&gt;&lt;/script&gt;
 </pre>
     <p>And breaks EVERYTHING!</p>
 </section>
 
 <section class="slide">
-    <h2>The present...</h2>
+    <h2>The Present...</h2>
+    <h3>The era of the script loader...</h3>
+    <ul>
+        <li>HeadJS - <a href="http://headjs.com" target="_blank">http://headjs.com</a></li>
+        <li>LABjs - <a href="http://labjs.com" target="_blank">http://labjs.com</a></li>
+        <li>LazyLoad - <a href="https://github.com/rgrove/lazyload/.com" target="_blank">https://github.com/rgrove/lazyload/</a></li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Script Loaders Are Great But...</h2>
+    <p>You still have to manage the dependency order manually.</p>
+<pre class="prettyprint">
+head.js("/path/to/jquery.js", "/google/analytics.js", "/js/site.js", function() {
+   // all done
+});
+</pre>
+<pre class="prettyprint">
+$LAB.script("framework.js").wait()
+   .script("plugin.framework.js")
+   .script("myplugin.framework.js").wait()
+   .script("init.js").wait();
+</pre>
+</section>
+
+<section class="slide">
+    <h2>The Present...</h2>
     <h3>RequireJS to the Rescue!</h3>
 <pre class="prettyprint">
-&lt;script type=&quot;text/javascript&quot; data-main=&quot;js/main.js&quot; src=&quot;js/vendor/require.js&quot;&gt;&lt;/script&gt;
+&lt;script data-main=&quot;js/main.js&quot; src=&quot;js/vendor/require.js&quot;&gt;&lt;/script&gt;
 </pre>
 </section>
 
@@ -143,8 +168,8 @@
 
 <section class="slide">
     <h2>The AMD Spec</h2>
-    <p>The Asynchronous Module Definition (**AMD**) API specifies a mechanism for defining modules such that the module and its dependencies can be asynchronously loaded. This is particularly well suited for the browser environment where synchronous loading of modules incurs performance, usability, debugging, and cross-domain access problems.
-    </p>
+    <p><span class="quote">&quot;</span>The Asynchronous Module Definition (**AMD**) API specifies a mechanism for defining modules such that the module and its dependencies can be asynchronously loaded. This is particularly well suited for the browser environment where synchronous loading of modules incurs performance, usability, debugging, and cross-domain access problems.
+    <span class="quote">&quot;</span></p>
     <p>
         <a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank">https://github.com/amdjs/amdjs-api/wiki/AMD</a>
     </p>
@@ -163,11 +188,11 @@ define( < id, > < [ dependencies ], > factory );
 </section>
 
 <section class="slide">
-    <h2>The simplest module</h2>
+    <h2>A Simple Module</h2>
 <pre class="prettyprint">
 define( function( ){ 
 
-    console.log( 'hello world' );
+   console.log( 'hello world' );
 } );
 </pre>
     <ul>
@@ -177,21 +202,19 @@ define( function( ){
 </section>
 
 <section class="slide">
-    <h2>A little more practical example</h2>
+    <h2>A More Useful Example</h2>
 <pre class="prettyprint">
 define( &#39;navView&#39;,
-        [
-            jquery,
-            underscore,
-            backbone
-        ],
-        function( $, _, Backbone){
-        &#39;use strict&#39;;
+      [
+         jquery,
+         underscore,
+         backbone
+      ],
+      function( $, _, Backbone){
+         var navView = Backbone.View.extend( { ... } );
 
-        var navView = Backbone.View.extend( { ... } );
-
-        return navView;
-    }
+         return navView;
+      }
 );
 </pre>
 </section>
@@ -219,10 +242,9 @@ define( &#39;navView&#39;,
     <h2>RequireJS</h2>
     <h3>The Simplest Implementation.</h3>
 <pre class="prettyprint">
-&lt;script type=&quot;text/javascript&quot; data-main=&quot;main&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
+&lt;script data-main=&quot;main&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
 </pre>
-<p>Pay close attention to the <code>data-main</code> attribute!</p>
-<p>This tells require to run the main.js to initialize the application.</p>
+   <p>The <code>data-main</code> attribute tells require to run the main.js to initialize the application.</p>
 </section>
 
 <section class="slide">
@@ -230,7 +252,7 @@ define( &#39;navView&#39;,
 <pre class="prettyprint">
 require( [ &#39;app&#39; ], function( app ){
 
-    app.init( );
+   app.init( );
 } );
 </pre>
     <p>The <code>require</code> function is used as a shortcut by RequireJS when a script has no exports.</p>
@@ -241,81 +263,90 @@ require( [ &#39;app&#39; ], function( app ){
     <h2>Configuring Require</h2>
 <pre class="prettyprint">
 require.config( {
-    baseUrl : &#39;&#39;,
-    paths : { },
-    shim: { }, //added in RequireJS 2.1.0 and is full of win
-    map : {},
-    config : {},
-    waitSeconds : 7,
-    deps : []
+   baseUrl : &#39;&#39;,
+   paths : { },
+   shim: { }, //added in RequireJS 2.1
+   config : {},
+   waitSeconds : 7,
+   deps : []
 } );
 </pre>
-    <p>To see all config options go to the require website: <a href="http://requirejs.org" target="_blank">requirejs.org</a></p>
+    <p>To see all config options go to the require website: <a href="http://requirejs.org/docs/api.html#config" target="_blank">requirejs.org</a></p>
 </section>
 
 <section class="slide">
     <h2>Config Options</h2>
     <ul>
-        <li>baseURL : The base url for your scripts.  This is where require will resolve dependencies from.</li>
-        <li>paths : </li>
-        <li>shim : Bring in libraries that are NOT AMD libraries (Backbone & Underscore).</li>
-        <li>map : </li>
-        <li>config : An object of configuration variables that other modules can access via config( 'prop' )</li>
-        <li>waitSeconds : The number of seconds to wait before running the data-main module.</li>
-        <li>deps : Files that should be loaded after the confg has been set (usually your main.js file).</li>
+        <li>baseURL - The base url for your scripts, relative to where require is loaded from.  This is where require will resolve dependencies from.</li>
+        <li>paths - mappings to modules not directly under the base URL</li>
+        <li>shim - load dependencies for libraries defined in paths</li>
+        <li>config - An object of configuration variables that other modules can access via config( 'prop' )</li>
+        <li>waitSeconds - The number of seconds to wait before running the data-main module.</li>
+        <li>deps - Files that should be loaded after the confg has been set (usually your main.js file).</li>
     </ul>
 </section>
 
 <section class="slide">
-    <h2>Common pattern for config</h2>
+    <h2>Common Pattern For Config</h2>
     <p>index.html</p>
 <pre class="prettyprint">
-&lt;script type=&quot;text/javascript&quot; data-main=&quot;config&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
+&lt;script data-main=&quot;config&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
 </pre>
     <p>config.js</p>
 <pre class="prettyprint">
 require.config( {
-    deps : [ &#39;main&#39; ]
+    deps : [ &#39;main&#39; ],
+    ...
 } );
 </pre>
 </section>
     
 <section class="slide">
-    <h1>Adding Non-AMD Modules</h1>    
+    <h1>Adding Non-AMD Libraries</h1>    
 </section>
     
 <section class="slide">
-    <h2>shim</h2>
+    <h2>paths + shim</h2>
 <pre class="prettyprint">
 paths : {
-    underscore : &#39;vendor/underscore&#39;,
-    backbone : &#39;vendor/backbone&#39;,
-    jquery : &#39;vendor/jquery-1.9.1&#39;
+   underscore : &#39;vendor/underscore&#39;,
+   backbone : &#39;vendor/backbone&#39;,
+   jquery : &#39;vendor/jquery-1.9.1&#39;
 },
 
 shim : {
-    backbone : {
-        deps : [ &#39;underscore&#39;, &#39;jquery&#39; ]
-    }
+   backbone : {
+      deps : [ &#39;underscore&#39;, &#39;jquery&#39; ]
+   }
 }
 </pre>
 </section>
 
 <section class="slide">
-    <h2>shimming plugins</h2>
+    <h2>Shimming jQuery Plugins</h2>
 <pre class="prettyprint">
 paths : {
-    jquery : &#39;vendor/jquery-1.9.1&#39;,
-    'jquery.validation' : &#39;vendor/jquery.validate.js&#39;,
+   jquery : &#39;vendor/jquery-1.9.1&#39;,
+   'jquery.validation' : &#39;vendor/jquery.validate.js&#39;,
 },
 
 shim : {
-    'jquery.validation' : {
-        deps : [ &#39;jquery&#39; ],
-        exports : 'jQuery.fn.validate' //checks of module is loaded
-    }
+   'jquery.validation' : {
+      deps : [ &#39;jquery&#39; ],
+      exports : 'jQuery.fn.validate' //checks of module is loaded
+   }
 }
 </pre>
+</section>
+
+<section class="slide">
+   <h2>Require Plugins</h2>
+   <ul>
+      <li>domReady - exactly what it says</li>
+      <li>text - load dependencies as plain text (for templating)</li>
+      <li>cs - loads coffeescript files</li>
+      <li>Templating Libraries</li>
+   </ul>
 </section>
 
 <section class="slide">
@@ -326,13 +357,15 @@ shim : {
     <h2>Best Practice</h2>
     <h3>One Module Per File</h3>
 <pre class="prettyprint">
-define( 'userModel' , [ 'underscore', 'backbone' ], function(){
-    ...
-} );
+&lt;script&gt;
+   define( 'userModel' , [ 'underscore', 'backbone' ], function(){
+      ...
+   } );
 
-define( 'userView' , [ 'userModel', underscore', 'backbone' ], function(){
-    ...
-} );
+   define( 'userView' , [ 'userModel', underscore', 'backbone' ], function(){
+      ...
+   } );
+&lt;/script&gt;
 </pre>
 </section>
 
@@ -342,13 +375,13 @@ define( 'userView' , [ 'userModel', underscore', 'backbone' ], function(){
 <p>a.js</p>
 <pre class="prettyprint">
 define( [ 'b' ], function(){
-    ...
+   ...
 } );
 </pre>
 <p>b.js</p>
 <pre class="prettyprint">
 define( [ 'a' ], function(){
-    ...
+   ...
 } );
 </pre>
 </section>
@@ -384,28 +417,81 @@ define( [ 'a' ], function(){
     <p>build.js</p>
 <pre class="prettyprint">
 ({
-    baseUrl : 'js', //all modules are loaded relative to this path
-    dir : 'build', //directory to save output
-    out : 'main-min.js' //name of the optimized file
-    paths : { } //mappings to other paths in your app !be sure to copy these from config!
-    shim : { } //libraries that expose globals ! be sure to copy these from config!
-    name : 'main' //
-    optimize : 'none | uglify | closure'
+   baseUrl : 'js', 
+   out : 'main-min.js' 
+   paths : { } 
+   shim : { } 
+   name : 'main' //
+   optimize : 'uglify'
+})
+</pre>
+</section>
+   
+<section class="slide">
+   <h2>Build Options</h2>
+   <ul>
+      <li>baseUrl - the base url for your scripts, in relation to build.js</li>
+      <li>out - the output name for the optimized file</li>
+      <li>paths - paths to non AMD libraries (copy from your app config)</li>
+      <li>shim - load dependencies for non AMD libraries</li>
+      <li>optimize - none | uglify | closure</li>
+   </ul>
+</section>
+
+<section class="slide">
+    <h2>Build For Multi Page Site</h2>
+<p><a href="https://github.com/requirejs/example-multipage" target="_blank">https://github.com/requirejs/example-multipage</a></p>
+<pre class="prettyprint">
+({
+   modules: [
+    //First set up the common build layer.
+   {
+      name: '../common',
+      include: ['jquery',
+         'app/lib',
+         'app/controller/Base',
+         'app/model/Base']
+      },
+      {
+         name: '../page1',
+         include: ['app/main1'],
+         exclude: ['../common']
+      },
+      {
+         name: '../page2',
+         include: ['app/main2'],
+         exclude: ['../common']
+      }
+   ]
 })
 </pre>
 </section>
 
 <section class="slide">
-    <h2>Build For Multi Page Site</h2>
+   <h2>Build For Multi Page Site</h2>
+   <p>Page 1</p>
 <pre class="prettyprint">
-({
-    appDir : '.', //assumes r.js is running in the root of your app
-    baseUrl : 'js', //all modules are loaded relative to this path
-    dir : 'build', //directory to save output
-    out : 'main-min.js' //name of the optimized file
-    
-})
+   &lt;script data-main=&quot;js/page1&quot; src=&quot;js/lib/require.js&quot;&gt;&lt;/script&gt;
 </pre>
+<p>Page 2</p>
+<pre class="prettyprint">
+   &lt;script data-main=&quot;js/page2&quot; src=&quot;js/lib/require.js&quot;&gt;&lt;/script&gt;
+</pre>
+</section>
+
+<section class="slide">
+   <h2>Build For Multi Page Site</h2>
+   <p>page1.js</p>
+<pre class="prettyprint">
+require(['./common'], function (common) {
+   require(['app/main1']);
+});
+</pre>
+   <p>page2.js</p>
+<pre class="prettyprint">
+require(['./common'], function (common) {
+   require(['app/main2']);
+});
 </section>
 
 <section class="slide">
@@ -443,30 +529,30 @@ define( [ 'a' ], function(){
 </section>
 
 <section class="slide">
-    <h2>Using module and export</h2>
+    <h2>Using module And export</h2>
 <pre class="prettyprint">
 module person{
-    var name = ''; //private
+   var name = ''; //private
 
-    export function sayHello(){
-        return 'Hello, ' + name;
-    }
+   export function sayHello(){
+      return 'Hello, ' + name;
+   }
 }
 </pre>
 </section>
 
 <section class="slide">
-    <h2>Multiple exports</h2>
+    <h2>Multiple Exports</h2>
 <pre class="prettyprint">
 module cars{
 
-    export var ford = {
-        make : 'Ford'
-    };
+   export var ford = {
+      make : 'Ford'
+   };
 
-    export var chevy = {
-        make : 'Chevrolet'
-    };
+   export var chevy = {
+      make : 'Chevrolet'
+   };
 }
 </pre>
 </section>
@@ -476,13 +562,13 @@ module cars{
 <pre class="prettyprint">
 module fusion{
     
-    import car.ford;
+   import car.ford;
 
-    var model = 'Fusion';
+   var model = 'Fusion';
 
-    export function getFullName(){
-        return car.make + ' ' + model;
-    }
+   export function getFullName(){
+      return car.make + ' ' + model;
+   }
 }
 </pre>
 </section>
