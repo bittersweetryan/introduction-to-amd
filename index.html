@@ -117,7 +117,7 @@
 
 <section class="slide">
     <h2>The Not So Distant Past...</h2>
-    <p>Then some hot shot designer from Kenosha who is a Bears edits your page...</p>
+    <p>Then some hot shot designer from Kenosha who is a Bears fan edits your page...</p>
 <pre class="prettyprint">
 &lt;script src=&quot;still.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;suck.js&quot;&gt;&lt;/script&gt;
@@ -174,9 +174,9 @@ $LAB.script("framework.js").wait()
     <h2>But Wait, Theres More!</h2>
     <ul>
         <li>No globals!  Everything is wrapped up in modules.</li>
-        <li>Scripts are loaded asyncronously, no script tags blocking UI, more than 1 script can be loaded at once</li>
+        <li>Scripts are loaded asynchronously, no script tags blocking UI, more than 1 script can be loaded at once</li>
         <li>Dependencies are well defined and injected into modules</li>
-        <li>Helps promote code organization and resue by breaking your code into small, modularized files</li>
+        <li>Helps promote code organization and reuse by breaking your code into small, modularized files</li>
         <li>Lots of libraries support it, and there is built in support for ones that do not.</li>
     </ul>
 </section>
@@ -201,7 +201,7 @@ define( < id, > < [ dependencies ], > factory );
 </pre>
     <ul>
         <li><strong>id</strong> &lt;string&gt; - The optional ID to be assigned to the module.  If no ID is passed will be the name of the .js file.</li>
-        <li><strong>dependencies</strong> &lt;array literal&gt; - The optional list of dependencies.  When id is ommited from a module then its relative path.</li>
+        <li><strong>dependencies</strong> &lt;array literal&gt; - The optional list of dependencies.  When id is omitted from a module then its relative path.</li>
         <li><strong>factory</strong> &lt;function&gt; - The function that initiates your module.  Whatever the factory returns is assigned to the module</li>
     </ul>
 </section>
@@ -546,7 +546,7 @@ require(['./common'], function (common) {
         <li>Dependencies are defined as strings.</li>
         <li>Without a build process encourages many http requests.</li>
         <li>Extra Markup</li>
-        <li>Not compatable with Harmony Modules</li>
+        <li>Not compatible with Harmony Modules</li>
     </ul>
     <p>
     <a href="http://tomdale.net/2012/01/amd-is-not-the-answer/">Why AMD is Not the Answer</a> by  Tom Dale, one of the Ember.js creators.
