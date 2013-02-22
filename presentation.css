@@ -16,3 +16,13 @@
 	margin-top: 45%;
 	position: relative;
 }
+
+.warn{
+	color: red;
+}
+
+span.quote{
+	color: #888;
+	font-weight: bold;
+	font-size: 1.4em;
+}
