@@ -429,13 +429,13 @@ require(
     <h3>Circular Dependencies</h3>
 <p>a.js</p>
 <pre class="prettyprint">
-define( [ 'b' ], function(){
+define( [ &#39;b&#39; ], function(){
    ...
 } );
 </pre>
 <p>b.js</p>
 <pre class="prettyprint">
-define( [ 'a' ], function(){
+define( [ &#39;a&#39; ], function(){
    ...
 } );
 </pre>
@@ -473,12 +473,12 @@ define( [ 'a' ], function(){
     <p>build.js</p>
 <pre class="prettyprint">
 ({
-   baseUrl : 'js', 
-   out : 'main-min.js' 
+   baseUrl : &#39;js&#39;, 
+   out : &#39;main-min.js&#39; 
    paths : { } 
    shim : { } 
-   name : 'main' //
-   optimize : 'uglify'
+   name : &#39;main&#39; //
+   optimize : &#39;uglify&#39;
 })
 </pre>
 </section>
@@ -502,21 +502,21 @@ define( [ 'a' ], function(){
    modules: [
     //First set up the common build layer.
    {
-      name: '../common',
-      include: ['jquery',
-         'app/lib',
-         'app/controller/Base',
-         'app/model/Base']
+      name: &#39;../common&#39;,
+      include: [&#39;jquery&#39;,
+         &#39;app/lib&#39;,
+         &#39;app/controller/Base&#39;,
+         &#39;app/model/Base&#39;]
       },
       {
-         name: '../page1',
-         include: ['app/main1'],
-         exclude: ['../common']
+         name: &#39;../page1&#39;,
+         include: [&#39;app/main1&#39;],
+         exclude: [&#39;../common&#39;]
       },
       {
-         name: '../page2',
-         include: ['app/main2'],
-         exclude: ['../common']
+         name: &#39;../page2&#39;,
+         include: [&#39;app/main2&#39;],
+         exclude: [&#39;../common&#39;]
       }
    ]
 })
@@ -539,14 +539,14 @@ define( [ 'a' ], function(){
    <h2>Build For Multi Page Site</h2>
    <p>page1.js</p>
 <pre class="prettyprint">
-require(['./common'], function (common) {
-   require(['app/main1']);
+require([&#39;./common&#39;], function (common) {
+   require([&#39;app/main1&#39;]);
 });
 </pre>
    <p>page2.js</p>
 <pre class="prettyprint">
-require(['./common'], function (common) {
-   require(['app/main2']);
+require([&#39;./common&#39;], function (common) {
+   require([&#39;app/main2&#39;]);
 });
 </pre>
 </section>
