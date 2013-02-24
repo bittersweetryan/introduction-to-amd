@@ -35,6 +35,16 @@
 <!-- Begin slides. Just make elements with a class of slide. -->
 
 <section class="slide">
+  <ul>
+    <li>Turn off IM</li>
+    <li>Water</li>
+    <li>Turn off extentions</li>
+    <li>Load projects in scripted and webstorm</li>
+    <li>Speak slowly and clearly</li>
+  </ul>
+</section>
+
+<section class="slide">
     <h1>AMD &amp; RequireJS</h1>
     
     <div class="amd-title">
@@ -198,7 +208,7 @@ $LAB.script("framework.js").wait()
 <section class="slide">
     <h2>define( )</h2>
 <pre class="prettyprint">
-define( < id, > < [ dependencies ], > factory );
+define( &lt; id, &gt; &lt; [ dependencies ], &gt; factory );
 </pre>
     <ul>
         <li><strong>id</strong> &lt;string&gt; - The optional ID to be assigned to the module.  If no ID is passed will be the name of the .js file.</li>
@@ -212,7 +222,7 @@ define( < id, > < [ dependencies ], > factory );
 <pre class="prettyprint">
 define( function( ){ 
 
-   console.log( 'hello world' );
+   console.log( &#39;hello world&#39; );
 } );
 </pre>
     <ul>
@@ -377,11 +387,14 @@ shim : {
       <li>cs - loads coffeescript files</li>
       <li>Templating Libraries</li>
    </ul>
+   <p>
+    <a href="https://github.com/jrburke/requirejs/wiki/Plugins" target="_blank">https://github.com/jrburke/requirejs/wiki/Plugins</a>
+   </p>
 </section>
 
 <section class="slide">
     <h2>Require Plugins</h2>
-    <p>Add the plugin source to the base directory.</p>
+    <p>To use a plugin just add the plugin source file to the base directory of your application.</p>
 <pre class="prettyprint">
 require(
     [
@@ -456,25 +469,6 @@ define( [ &#39;a&#39; ], function(){
 </section>
 
 <section class="slide">
-    <h2>Build Options</h2>
-    <ul>
-        <li>command line options</li>
-        <li>build.js</li>
-    </ul>
-    <p>build.js</p>
-<pre class="prettyprint">
-({
-   baseUrl : &#39;js&#39;, 
-   out : &#39;main-min.js&#39; 
-   paths : { } 
-   shim : { } 
-   name : &#39;main&#39; //
-   optimize : &#39;uglify&#39;
-})
-</pre>
-</section>
-   
-<section class="slide">
    <h2>Build Options</h2>
    <ul>
       <li>baseUrl - the base url for your scripts, in relation to build.js</li>
@@ -486,8 +480,35 @@ define( [ &#39;a&#39; ], function(){
 </section>
 
 <section class="slide">
+    <h2>Build Options</h2>
+    <p>Using build.js</p>
+<pre class="prettyprint">
+({
+   baseUrl : &#39;js&#39;, 
+   out : &#39;main-min.js&#39; 
+   paths : { } 
+   shim : { } 
+   name : &#39;main&#39; //
+   optimize : &#39;uglify&#39;
+})
+</pre>
+<pre class="prettyprint">
+node r.js -o build.js
+</pre>
+</section>
+
+<section class="slide">
+<h2>Build Options</h2>
+<p>Command Line</p>
+<pre class="prettyprint">
+  node r.js -o baseUrl=. name=main out=main-built.js
+</pre>
+<p class="warn">CLI options cannot have <code>.</code> in them!</p>
+</section>
+
+
+<section class="slide">
     <h2>Build For Multi Page Site</h2>
-<p><a href="https://github.com/requirejs/example-multipage" target="_blank">https://github.com/requirejs/example-multipage</a></p>
 <pre class="prettyprint">
 ({
    modules: [
@@ -512,6 +533,7 @@ define( [ &#39;a&#39; ], function(){
    ]
 })
 </pre>
+<p><a href="https://github.com/requirejs/example-multipage" target="_blank">https://github.com/requirejs/example-multipage</a></p>
 </section>
 
 <section class="slide">
