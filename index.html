@@ -35,6 +35,16 @@
 <!-- Begin slides. Just make elements with a class of slide. -->
 
 <section class="slide">
+  <ul>
+    <li>Turn off IM</li>
+    <li>Water</li>
+    <li>Turn off extentions</li>
+    <li>Load projects in scripted and webstorm</li>
+    <li>Speak slowly and clearly</li>
+  </ul>
+</section>
+
+<section class="slide">
     <h1>AMD &amp; RequireJS</h1>
     
     <div class="amd-title">
@@ -178,6 +188,7 @@ $LAB.script("framework.js").wait()
         <li>Dependencies are well defined and injected into modules</li>
         <li>Helps promote code organization and reuse by breaking your code into small, modularized files</li>
         <li>Lots of libraries support it, and there is built in support for ones that do not.</li>
+        <li>This: <a href="https://gist.github.com/desandro/4686136" target="_blank">https://gist.github.com/desandro/4686136</a></li>
     </ul>
 </section>
 
@@ -419,13 +430,13 @@ require(
     <h3>Circular Dependencies</h3>
 <p>a.js</p>
 <pre class="prettyprint">
-define( [ 'b' ], function(){
+define( [ &#39;b&#39; ], function(){
    ...
 } );
 </pre>
 <p>b.js</p>
 <pre class="prettyprint">
-define( [ 'a' ], function(){
+define( [ &#39;a&#39; ], function(){
    ...
 } );
 </pre>
@@ -463,12 +474,12 @@ define( [ 'a' ], function(){
     <p>build.js</p>
 <pre class="prettyprint">
 ({
-   baseUrl : 'js', 
-   out : 'main-min.js' 
+   baseUrl : &#39;js&#39;, 
+   out : &#39;main-min.js&#39; 
    paths : { } 
    shim : { } 
-   name : 'main' //
-   optimize : 'uglify'
+   name : &#39;main&#39; //
+   optimize : &#39;uglify&#39;
 })
 </pre>
 </section>
@@ -492,21 +503,21 @@ define( [ 'a' ], function(){
    modules: [
     //First set up the common build layer.
    {
-      name: '../common',
-      include: ['jquery',
-         'app/lib',
-         'app/controller/Base',
-         'app/model/Base']
+      name: &#39;../common&#39;,
+      include: [&#39;jquery&#39;,
+         &#39;app/lib&#39;,
+         &#39;app/controller/Base&#39;,
+         &#39;app/model/Base&#39;]
       },
       {
-         name: '../page1',
-         include: ['app/main1'],
-         exclude: ['../common']
+         name: &#39;../page1&#39;,
+         include: [&#39;app/main1&#39;],
+         exclude: [&#39;../common&#39;]
       },
       {
-         name: '../page2',
-         include: ['app/main2'],
-         exclude: ['../common']
+         name: &#39;../page2&#39;,
+         include: [&#39;app/main2&#39;],
+         exclude: [&#39;../common&#39;]
       }
    ]
 })
@@ -529,15 +540,16 @@ define( [ 'a' ], function(){
    <h2>Build For Multi Page Site</h2>
    <p>page1.js</p>
 <pre class="prettyprint">
-require(['./common'], function (common) {
-   require(['app/main1']);
+require([&#39;./common&#39;], function (common) {
+   require([&#39;app/main1&#39;]);
 });
 </pre>
    <p>page2.js</p>
 <pre class="prettyprint">
-require(['./common'], function (common) {
-   require(['app/main2']);
+require([&#39;./common&#39;], function (common) {
+   require([&#39;app/main2&#39;]);
 });
+</pre>
 </section>
 
 <section class="slide">
@@ -551,6 +563,14 @@ require(['./common'], function (common) {
     <p>
     <a href="http://tomdale.net/2012/01/amd-is-not-the-answer/">Why AMD is Not the Answer</a> by  Tom Dale, one of the Ember.js creators.
     </p>
+</section>
+
+<section class="slide">
+  <h2>Tooling</h2>
+  <ul>
+    <li>Scripted - <a href="https://github.com/scripted-editor/scripted" target="blank">https://github.com/scripted-editor/scripted</a> </li>
+    <li>WebStorm - <a href="http://www.jetbrains.com/webstorm/" target="blank">http://www.jetbrains.com/webstorm/</a></li>
+  </ul>
 </section>
 
 <section class="slide">
