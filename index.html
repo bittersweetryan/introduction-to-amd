@@ -380,6 +380,23 @@ shim : {
 </section>
 
 <section class="slide">
+  <h2>Exporting Your Library</h2>
+  <p>Example code from Lo-Dash.js</p>
+<pre class="prettyprint">
+if (typeof define == &#39;function&#39; &amp;&amp; typeof define.amd == &#39;object&#39; &amp;&amp; define.amd) {
+
+  window._ = lodash;
+
+  // define as an anonymous module so, through path mapping, 
+  // it can be referenced as the &quot;underscore&quot; module
+  define(function() {
+    return lodash;
+  });
+}  
+</pre>
+</section>
+
+<section class="slide">
    <h2>Require Plugins</h2>
    <ul>
       <li>domReady - exactly what it says</li>
