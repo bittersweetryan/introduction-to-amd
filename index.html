@@ -38,8 +38,9 @@
   <ul>
     <li>Turn off IM</li>
     <li>Water</li>
-    <li>Turn off extentions</li>
+    <li>Turn off extensions</li>
     <li>Load projects in scripted and webstorm</li>
+    <li>Open term to dropbox/require</li>
     <li>Speak slowly and clearly</li>
   </ul>
 </section>
@@ -56,11 +57,13 @@
 
 <section class="slide">
     <h2>Who Am I</h2>
+    <h3>Ryan Anklam</h3>
     <ul>
         <li>Front End Engineer at Northwestern Mutual</li>
         <li>Web Developer since 1997</li>
         <li>Active GitHubber</li>
         <li>bittersweetryan (twitter | github | et.al.)</li>
+        <li>ryan.anklam@gmail.com</li>
     </ul>
 </section>
 
@@ -93,7 +96,7 @@
    &lt;/tr&gt;
 &lt;/table&gt;
 </pre>
-<p>Confession: I used to write code like this while watching the Fresh Prince of Bel Air and Martin</p>
+<p>Confession: I used to write code like this while watching the Fresh Prince of Bel Air on my IBM Aptiva.</p>
 </section>
 
 <section class="slide">
@@ -188,6 +191,7 @@ $LAB.script("framework.js").wait()
         <li>Dependencies are well defined and injected into modules</li>
         <li>Helps promote code organization and reuse by breaking your code into small, modularized files</li>
         <li>Lots of libraries support it, and there is built in support for ones that do not.</li>
+        <li>It's easy!</li>
         <li>This: <a href="https://gist.github.com/desandro/4686136" target="_blank">https://gist.github.com/desandro/4686136</a></li>
     </ul>
 </section>
@@ -212,7 +216,7 @@ define( &lt; id, &gt; &lt; [ dependencies ], &gt; factory );
 </pre>
     <ul>
         <li><strong>id</strong> &lt;string&gt; - The optional ID to be assigned to the module.  If no ID is passed will be the name of the .js file.</li>
-        <li><strong>dependencies</strong> &lt;array literal&gt; - The optional list of dependencies.  When id is omitted from a module then its relative path.</li>
+        <li><strong>dependencies</strong> &lt;array literal&gt; - The optional list of dependencies.</li>
         <li><strong>factory</strong> &lt;function&gt; - The function that initiates your module.  Whatever the factory returns is assigned to the module</li>
     </ul>
 </section>
@@ -222,7 +226,7 @@ define( &lt; id, &gt; &lt; [ dependencies ], &gt; factory );
 <pre class="prettyprint">
 define( function( ){ 
 
-   console.log( &#39;hello world&#39; );
+   return {};
 } );
 </pre>
     <ul>
@@ -236,9 +240,9 @@ define( function( ){
 <pre class="prettyprint">
 define( &#39;navView&#39;,
       [
-         jquery,
-         underscore,
-         backbone
+         &#39;jquery&#39;,
+         &#39;underscore&#39;,
+         &#39;backbone&#39;
       ],
       function( $, _, Backbone){
          var navView = Backbone.View.extend( { ... } );
@@ -272,7 +276,7 @@ define( &#39;navView&#39;,
     <h2>RequireJS</h2>
     <h3>The Simplest Implementation.</h3>
 <pre class="prettyprint">
-&lt;script data-main=&quot;main&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
+&lt;script data-main=&quot;main.js&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
 </pre>
    <p>The <code>data-main</code> attribute tells require to run the main.js to initialize the application.</p>
 </section>
@@ -287,6 +291,18 @@ require( [ &#39;app&#39; ], function( app ){
 </pre>
     <p>The <code>require</code> function is used as a shortcut by RequireJS when a script has no exports.</p>
     <p>app.js can have its own dependencies that will be resolved when it is included into main script.</p>
+</section>
+
+<section class="slide">
+    <h2>Config Options</h2>
+    <ul>
+        <li>baseURL - The base url for your scripts, relative to where require is loaded from.  This is where require will resolve dependencies from.</li>
+        <li>paths - mappings to modules not directly under the base URL</li>
+        <li>shim - add support for libraries that do not use the define function</li>
+        <li>config - An object of configuration variables that other modules can access via config( 'prop' )</li>
+        <li>waitSeconds - The number of seconds to wait before running the data-main module.</li>
+        <li>deps - Files that should be loaded after the confg has been set (usually your main.js file).</li>
+    </ul>
 </section>
 
 <section class="slide">
@@ -305,22 +321,10 @@ require.config( {
 </section>
 
 <section class="slide">
-    <h2>Config Options</h2>
-    <ul>
-        <li>baseURL - The base url for your scripts, relative to where require is loaded from.  This is where require will resolve dependencies from.</li>
-        <li>paths - mappings to modules not directly under the base URL</li>
-        <li>shim - load dependencies for libraries defined in paths</li>
-        <li>config - An object of configuration variables that other modules can access via config( 'prop' )</li>
-        <li>waitSeconds - The number of seconds to wait before running the data-main module.</li>
-        <li>deps - Files that should be loaded after the confg has been set (usually your main.js file).</li>
-    </ul>
-</section>
-
-<section class="slide">
     <h2>Common Pattern For Config</h2>
     <p>index.html</p>
 <pre class="prettyprint">
-&lt;script data-main=&quot;config&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
+&lt;script data-main=&quot;config.js&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
 </pre>
     <p>config.js</p>
 <pre class="prettyprint">
@@ -344,9 +348,13 @@ paths : {
 },
 
 shim : {
-   backbone : {
-      deps : [ &#39;underscore&#39;, &#39;jquery&#39; ]
-   }
+  underscore : {
+    exports : &#39;underscore&#39;
+  },
+  backbone : {
+    deps : [ &#39;underscore&#39;, &#39;jquery&#39; ],
+    exports : &#39;Backbone&#39;
+  }
 }
 </pre>
 </section>
@@ -356,7 +364,7 @@ shim : {
 <pre class="prettyprint">
 require.config({
     paths:{
-        &#39;jquery&#39;: &#39;http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min&#39;
+        &#39;jquery&#39;: &#39;http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js&#39;
     }
 });
 </pre>
@@ -376,6 +384,21 @@ shim : {
       exports : 'jQuery.fn.validate' //checks of module is loaded
    }
 }
+</pre>
+</section>
+
+<section class="slide">
+  <h2>Exporting Your Library</h2>
+  <p>From the Lo-Dash source code:</p>
+<pre class="prettyprint">
+  if (typeof define == &#39;function&#39; &amp;&amp; typeof define.amd == &#39;object&#39; &amp;&amp; define.amd) {
+
+    window._ = lodash;
+    
+    define(function() {
+      return lodash;
+    });
+  }
 </pre>
 </section>
 
@@ -417,11 +440,11 @@ require(
     <h3>One Module Per File</h3>
 <pre class="prettyprint">
 &lt;script&gt;
-   define( 'userModel' , [ 'underscore', 'backbone' ], function(){
+   define( &#39;userModel&#39; , [ &#39;underscore&#39;, &#39;backbone&#39; ], function(){
       ...
    } );
 
-   define( 'userView' , [ 'userModel', underscore', 'backbone' ], function(){
+   define( &#39;userView&#39; , [ &#39;userModel&#39;, &#39;underscore&#39;, &#39;backbone&#39; ], function(){
       ...
    } );
 &lt;/script&gt;
@@ -481,7 +504,7 @@ define( [ &#39;a&#39; ], function(){
 
 <section class="slide">
     <h2>Build Options</h2>
-    <p>Using build.js</p>
+    <h4>Using build.js</h4>
 <pre class="prettyprint">
 ({
    baseUrl : &#39;js&#39;, 
@@ -499,11 +522,11 @@ node r.js -o build.js
 
 <section class="slide">
 <h2>Build Options</h2>
-<p>Command Line</p>
+<h4>Command Line</h4>
 <pre class="prettyprint">
   node r.js -o baseUrl=. name=main out=main-built.js
 </pre>
-<p class="warn">CLI options cannot have <code>.</code> in them!</p>
+<p class="warn">In the CLI dots are viewed as property seperators!</p>
 </section>
 
 
@@ -513,24 +536,24 @@ node r.js -o build.js
 ({
    modules: [
     //First set up the common build layer.
-   {
+    {
       name: &#39;../common&#39;,
       include: [&#39;jquery&#39;,
          &#39;app/lib&#39;,
          &#39;app/controller/Base&#39;,
          &#39;app/model/Base&#39;]
-      },
-      {
-         name: &#39;../page1&#39;,
-         include: [&#39;app/main1&#39;],
-         exclude: [&#39;../common&#39;]
-      },
-      {
-         name: &#39;../page2&#39;,
-         include: [&#39;app/main2&#39;],
-         exclude: [&#39;../common&#39;]
-      }
-   ]
+    },
+    {
+      name: &#39;../page1&#39;,
+      include: [&#39;app/main1&#39;],
+      exclude: [&#39;../common&#39;]
+    },
+    {
+      name: &#39;../page2&#39;,
+      include: [&#39;app/main2&#39;],
+      exclude: [&#39;../common&#39;]
+    }
+  ]
 })
 </pre>
 <p><a href="https://github.com/requirejs/example-multipage" target="_blank">https://github.com/requirejs/example-multipage</a></p>
@@ -610,10 +633,10 @@ require([&#39;./common&#39;], function (common) {
     <h2>Using module And export</h2>
 <pre class="prettyprint">
 module person{
-   var name = ''; //private
+   var name = &#39;&#39;; //private
 
    export function sayHello(){
-      return 'Hello, ' + name;
+      return &#39;Hello, &#39; + name;
    }
 }
 </pre>
@@ -622,14 +645,14 @@ module person{
 <section class="slide">
     <h2>Multiple Exports</h2>
 <pre class="prettyprint">
-module cars{
+module carFactory{
 
    export var ford = {
-      make : 'Ford'
+      make : &#39;Ford&#39;
    };
 
    export var chevy = {
-      make : 'Chevrolet'
+      make : &#39;Chevrolet&#39;
    };
 }
 </pre>
@@ -640,15 +663,26 @@ module cars{
 <pre class="prettyprint">
 module fusion{
     
-   import car.ford;
+   import car.ford ;
 
-   var model = 'Fusion';
+   var model = &#39;Fusion&#39;;
 
    export function getFullName(){
-      return car.make + ' ' + model;
+      return ford.make + &#39; &#39; + model;
    }
 }
 </pre>
+</section>
+
+<section class="slide">
+  <h1>Questions?</h1>
+</section>
+
+<section class="slide">
+  <h2>The End.</h2>
+  <p>
+    <a href="http://bittersweetryan.github.com/introduction-to-amd/" target="_blank">http://bittersweetryan.github.com/introduction-to-amd/</a>
+  </p>
 </section>
 <!-- End slides. -->
 
