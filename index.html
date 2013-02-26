@@ -141,19 +141,12 @@
 </section>
 
 <section class="slide">
-    <h2>The Present...</h2>
-    <h3>The era of the script loader...</h3>
+    <h2>The era of the script loader...</h2>
     <ul>
         <li>HeadJS - <a href="http://headjs.com" target="_blank">http://headjs.com</a></li>
         <li>LABjs - <a href="http://labjs.com" target="_blank">http://labjs.com</a></li>
-        <li>LazyLoad - <a href="https://github.com/rgrove/lazyload/.com" target="_blank">https://github.com/rgrove/lazyload/</a></li>
     </ul>
-</section>
-
-<section class="slide">
-    <h2>Script Loaders Are Great But...</h2>
-    <p>You still have to manage the dependency order manually.</p>
-<pre class="prettyprint">
+    <pre class="prettyprint">
 head.js("/path/to/jquery.js", "/google/analytics.js", "/js/site.js", function() {
    // all done
 });
@@ -164,6 +157,16 @@ $LAB.script("framework.js").wait()
    .script("myplugin.framework.js").wait()
    .script("init.js").wait();
 </pre>
+</section>
+
+<section class="slide">
+    <h2>Script Loaders Are Great But...</h2>
+
+  <ul>
+      <li>Still have to manage the dependency order manually.</li>
+      <li>Need to know all of the dependencies up front</li>
+      <li>Still looks a bit messy</li>
+  </ul>
 </section>
 
 <section class="slide">
@@ -494,7 +497,7 @@ define( [ &#39;a&#39; ], function(){
 <section class="slide">
    <h2>Build Options</h2>
    <ul>
-      <li>baseUrl - the base url for your scripts, in relation to build.js</li>
+      <li>baseUrl - the base url for your scripts, in relation to build.js or the current working directory if using CLI.</li>
       <li>out - the output name for the optimized file</li>
       <li>paths - paths to non AMD libraries (copy from your app config)</li>
       <li>shim - load dependencies for non AMD libraries</li>
