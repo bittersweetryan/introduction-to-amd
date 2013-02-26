@@ -38,8 +38,9 @@
   <ul>
     <li>Turn off IM</li>
     <li>Water</li>
-    <li>Turn off extentions</li>
+    <li>Turn off extensions</li>
     <li>Load projects in scripted and webstorm</li>
+    <li>Open term to dropbox/require</li>
     <li>Speak slowly and clearly</li>
   </ul>
 </section>
@@ -293,6 +294,18 @@ require( [ &#39;app&#39; ], function( app ){
 </section>
 
 <section class="slide">
+    <h2>Config Options</h2>
+    <ul>
+        <li>baseURL - The base url for your scripts, relative to where require is loaded from.  This is where require will resolve dependencies from.</li>
+        <li>paths - mappings to modules not directly under the base URL</li>
+        <li>shim - add support for libraries that do not use the define function</li>
+        <li>config - An object of configuration variables that other modules can access via config( 'prop' )</li>
+        <li>waitSeconds - The number of seconds to wait before running the data-main module.</li>
+        <li>deps - Files that should be loaded after the confg has been set (usually your main.js file).</li>
+    </ul>
+</section>
+
+<section class="slide">
     <h2>Configuring Require</h2>
 <pre class="prettyprint">
 require.config( {
@@ -305,18 +318,6 @@ require.config( {
 } );
 </pre>
     <p>To see all config options go to the require website: <a href="http://requirejs.org/docs/api.html#config" target="_blank">requirejs.org</a></p>
-</section>
-
-<section class="slide">
-    <h2>Config Options</h2>
-    <ul>
-        <li>baseURL - The base url for your scripts, relative to where require is loaded from.  This is where require will resolve dependencies from.</li>
-        <li>paths - mappings to modules not directly under the base URL</li>
-        <li>shim - add support for libraries that do not use the define function</li>
-        <li>config - An object of configuration variables that other modules can access via config( 'prop' )</li>
-        <li>waitSeconds - The number of seconds to wait before running the data-main module.</li>
-        <li>deps - Files that should be loaded after the confg has been set (usually your main.js file).</li>
-    </ul>
 </section>
 
 <section class="slide">
@@ -388,15 +389,16 @@ shim : {
 
 <section class="slide">
   <h2>Exporting Your Library</h2>
+  <p>From the Lo-Dash source code:</p>
 <pre class="prettyprint">
-if (typeof define == &#39;function&#39; &amp;&amp; typeof define.amd == &#39;object&#39; &amp;&amp; define.amd) {
+  if (typeof define == &#39;function&#39; &amp;&amp; typeof define.amd == &#39;object&#39; &amp;&amp; define.amd) {
 
-  window._ = _;
-
-  define('underscore', function() {
-    return _;
-  });
-}  
+    window._ = lodash;
+    
+    define(function() {
+      return lodash;
+    });
+  }
 </pre>
 </section>
 
@@ -534,24 +536,24 @@ node r.js -o build.js
 ({
    modules: [
     //First set up the common build layer.
-   {
+    {
       name: &#39;../common&#39;,
       include: [&#39;jquery&#39;,
          &#39;app/lib&#39;,
          &#39;app/controller/Base&#39;,
          &#39;app/model/Base&#39;]
-      },
-      {
-         name: &#39;../page1&#39;,
-         include: [&#39;app/main1&#39;],
-         exclude: [&#39;../common&#39;]
-      },
-      {
-         name: &#39;../page2&#39;,
-         include: [&#39;app/main2&#39;],
-         exclude: [&#39;../common&#39;]
-      }
-   ]
+    },
+    {
+      name: &#39;../page1&#39;,
+      include: [&#39;app/main1&#39;],
+      exclude: [&#39;../common&#39;]
+    },
+    {
+      name: &#39;../page2&#39;,
+      include: [&#39;app/main2&#39;],
+      exclude: [&#39;../common&#39;]
+    }
+  ]
 })
 </pre>
 <p><a href="https://github.com/requirejs/example-multipage" target="_blank">https://github.com/requirejs/example-multipage</a></p>
@@ -631,10 +633,10 @@ require([&#39;./common&#39;], function (common) {
     <h2>Using module And export</h2>
 <pre class="prettyprint">
 module person{
-   var name = ''; //private
+   var name = &#39;&#39;; //private
 
    export function sayHello(){
-      return 'Hello, ' + name;
+      return &#39;Hello, &#39; + name;
    }
 }
 </pre>
@@ -643,14 +645,14 @@ module person{
 <section class="slide">
     <h2>Multiple Exports</h2>
 <pre class="prettyprint">
-module cars{
+module carFactory{
 
    export var ford = {
-      make : 'Ford'
+      make : &#39;Ford&#39;
    };
 
    export var chevy = {
-      make : 'Chevrolet'
+      make : &#39;Chevrolet&#39;
    };
 }
 </pre>
@@ -661,12 +663,12 @@ module cars{
 <pre class="prettyprint">
 module fusion{
     
-   import car.ford;
+   import car.ford ;
 
    var model = 'Fusion';
 
    export function getFullName(){
-      return car.make + ' ' + model;
+      return ford.make + ' ' + model;
    }
 }
 </pre>
