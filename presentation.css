@@ -11,9 +11,15 @@
 	left: 0;
 }
 
-#subtitle{
+#subtitle {
 	text-align: center;
-	margin-top: 45%;
+	bottom: 20px;
+	position: fixed;
+	width: 100%;
+}
+
+#subtitle h4 {
+	margion: 0 auto;
 	position: relative;
 }
 
