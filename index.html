@@ -34,20 +34,6 @@
 
 <!-- Begin slides. Just make elements with a class of slide. -->
 
-<<<<<<< HEAD
-<section class="slide">
-  <ul>
-    <li>Turn off IM</li>
-    <li>Water</li>
-    <li>Turn off extensions</li>
-    <li>Load projects in scripted and webstorm</li>
-    <li>Open term to dropbox/require</li>
-    <li>Speak slowly and clearly</li>
-  </ul>
-</section>
-=======
->>>>>>> 0a0d38ae5ca29acb29d2112446c30d44051e6571
-
 <section class="slide">
     <h1>AMD &amp; RequireJS</h1>
     
@@ -324,21 +310,6 @@ require.config( {
 </section>
 
 <section class="slide">
-<<<<<<< HEAD
-=======
-    <h2>Config Options</h2>
-    <ul>
-        <li>baseURL - The base url for your scripts, relative to where require is loaded from.  This is where require will resolve dependencies from.</li>
-        <li>paths - mappings to modules not directly under the base URL</li>
-        <li>shim - add support for libraries that do not use the define function</li>
-        <li>config - An object of configuration variables that other modules can access via config( 'prop' )</li>
-        <li>waitSeconds - The number of seconds to wait before running the data-main module.</li>
-        <li>deps - Files that should be loaded after the confg has been set (usually your main.js file).</li>
-    </ul>
-</section>
-
-<section class="slide">
->>>>>>> 0a0d38ae5ca29acb29d2112446c30d44051e6571
     <h2>Common Pattern For Config</h2>
     <p>index.html</p>
 <pre class="prettyprint">
@@ -407,7 +378,6 @@ shim : {
 
 <section class="slide">
   <h2>Exporting Your Library</h2>
-<<<<<<< HEAD
   <p>From the Lo-Dash source code:</p>
 <pre class="prettyprint">
   if (typeof define == &#39;function&#39; &amp;&amp; typeof define.amd == &#39;object&#39; &amp;&amp; define.amd) {
@@ -418,17 +388,6 @@ shim : {
       return lodash;
     });
   }
-=======
-<pre class="prettyprint">
-if (typeof define == &#39;function&#39; &amp;&amp; typeof define.amd == &#39;object&#39; &amp;&amp; define.amd) {
-
-  window._ = _;
-
-  define('underscore', function() {
-    return _;
-  });
-}  
->>>>>>> 0a0d38ae5ca29acb29d2112446c30d44051e6571
 </pre>
 </section>
 
@@ -765,20 +724,6 @@ module fusion{
     $(function() {
         $.deck('.slide');
     });
-</script>
-
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-2411698-13']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
 </script>
 </body>
 </html>
