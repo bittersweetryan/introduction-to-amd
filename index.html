@@ -458,17 +458,36 @@ require(
 </section>
 
 <section class="slide">
-    <h2>Things to Look Out For</h2>
-    <h3>Circular Dependencies</h3>
+    <h2>Best Practice</h2>
+    <h3>Give Modules ID's</h3>
+    <p>When using anonymous modules (aka modules with no ID) its easy to break your project by renaming it.</p>
 <p>a.js</p>
 <pre class="prettyprint">
 define( [ &#39;b&#39; ], function(){
    ...
 } );
 </pre>
-<p>b.js</p>
+<p>When a.js becomes appView.js the following module breaks.</p>
 <pre class="prettyprint">
 define( [ &#39;a&#39; ], function(){
+   ...
+} );
+</pre>
+</section>
+
+<section class="slide">
+    <h2>Watch Out!</h2>
+    <h3>Circular Dependencies</h3>
+    <p>One module has a dependency on a module that has a dependency on it.</p>
+    <p>a.js</p>
+<pre class="prettyprint">
+define( 'a', [ &#39;b&#39; ], function(){
+   ...
+} );
+</pre>
+    <p>b.js</p>
+<pre class="prettyprint">
+define('b', [ &#39;a&#39; ], function(){
    ...
 } );
 </pre>
