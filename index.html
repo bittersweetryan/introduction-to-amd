@@ -96,7 +96,7 @@
    &lt;/tr&gt;
 &lt;/table&gt;
 </pre>
-<p>Confession: I used to write code like this while watching the Fresh Prince of Bel Air on my IBM Aptiva.</p>
+<p>Confession: I used to write code like this on my IBM Aptiva while watching the Fresh Prince of Bel Air.</p>
 </section>
 
 <section class="slide">
@@ -176,8 +176,10 @@ $LAB.script("framework.js").wait()
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;title&gt;Awesme Stuff&lt;/title&gt;
-        &lt;script data-main=&quot;scripts/main.js&quot; src=&quot;scripts/require.js&quot;&gt;&lt;/script&gt;
+        &lt;title&gt;Awesomr Stuff&lt;/title&gt;
+        &lt;script 
+            data-main=&quot;scripts/main.js&quot; 
+            src=&quot;scripts/require.js&quot;&gt;&lt;/script&gt;
     &lt;/head&gt;
     &lt;body&gt;
         ...
@@ -189,13 +191,13 @@ $LAB.script("framework.js").wait()
 <section class="slide">
     <h2>But Wait, Theres More!</h2>
     <ul>
-        <li>No globals!  Everything is wrapped up in modules.</li>
-        <li>Scripts are loaded asynchronously, no script tags blocking UI, more than 1 script can be loaded at once</li>
-        <li>Dependencies are well defined and injected into modules</li>
-        <li>Helps promote code organization and reuse by breaking your code into small, modularized files</li>
-        <li>Lots of libraries support it, and there is built in support for ones that do not.</li>
-        <li>It's easy!</li>
-        <li>This: <a href="https://gist.github.com/desandro/4686136" target="_blank">https://gist.github.com/desandro/4686136</a></li>
+        <li class="slide">No globals!  Everything is wrapped in AMD functions.</li>
+        <li class="slide">Scripts are loaded asynchronously, no script tags blocking UI, more than 1 script can be loaded at once</li>
+        <li class="slide">Dependencies are well defined and injected into modules</li>
+        <li class="slide">Helps promote code organization and reuse by breaking your code into small, modularized files</li>
+        <li class="slide">Lots of libraries support it, and there is built in support for ones that do not.</li>
+        <li class="slide">It's easy!</li>
+        <li class="slide">This: <a href="https://gist.github.com/desandro/4686136" target="_blank">https://gist.github.com/desandro/4686136</a></li>
     </ul>
 </section>
 
@@ -248,7 +250,9 @@ define( &#39;navView&#39;,
          &#39;backbone&#39;
       ],
       function( $, _, Backbone){
-         var navView = Backbone.View.extend( { ... } );
+         var navView = Backbone.View.extend( {
+            ...
+         } );
 
          return navView;
       }
@@ -302,12 +306,12 @@ require( [ &#39;app&#39; ], function( app ){
 <section class="slide">
     <h2>Config Options</h2>
     <ul>
-        <li>baseURL - The base url for your scripts, relative to where require is loaded from.  This is where require will resolve dependencies from.</li>
-        <li>paths - mappings to modules not directly under the base URL</li>
-        <li>shim - add support for libraries that do not use the define function</li>
-        <li>config - An object of configuration variables that other modules can access via config( 'prop' )</li>
-        <li>waitSeconds - The number of seconds to wait before running the data-main module.</li>
-        <li>deps - Files that should be loaded after the confg has been set (usually your main.js file).</li>
+        <li class="slide">baseURL - The base url for your scripts, relative to where require is loaded from.  This is where require will resolve dependencies from.</li>
+        <li class="slide">paths - mappings to modules not directly under the base URL</li>
+        <li class="slide">shim - add support for libraries that do not use the define function</li>
+        <li class="slide">config - An object of configuration variables that other modules can access via config( 'prop' )</li>
+        <li class="slide">waitSeconds - The number of seconds to wait before running the data-main module.</li>
+        <li class="slide">deps - Files that should be loaded after the confg has been set (usually your main.js file).</li>
     </ul>
 </section>
 
@@ -519,11 +523,11 @@ define('b', [ &#39;a&#39; ], function(){
 <section class="slide">
    <h2>Build Options</h2>
    <ul>
-      <li>baseUrl - the base url for your scripts, in relation to build.js or the current working directory if using CLI.</li>
-      <li>out - the output name for the optimized file</li>
-      <li>paths - paths to non AMD libraries (copy from your app config)</li>
-      <li>shim - load dependencies for non AMD libraries</li>
-      <li>optimize - none | uglify | closure</li>
+      <li class="slide">baseUrl - the base url for your scripts, in relation to build.js or the current working directory if using CLI.</li>
+      <li class="slide">out - the output name for the optimized file</li>
+      <li class="slide">paths - paths to non AMD libraries (copy from your app config)</li>
+      <li class="slide">shim - load dependencies for non AMD libraries</li>
+      <li class="slide">optimize - none | uglify | closure</li>
    </ul>
 </section>
 
