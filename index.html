@@ -39,8 +39,6 @@
     <li>Turn off IM</li>
     <li>Water</li>
     <li>Turn off extensions</li>
-    <li>Load projects in scripted and webstorm</li>
-    <li>Open term to dropbox/require</li>
     <li>Speak slowly and clearly</li>
   </ul>
 </section>
@@ -88,10 +86,17 @@
 &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;
    &lt;tr&gt;
       &lt;td&gt;
-         &lt;img src=&quot;link1.jpg&quot; onmouseover=&quot;this.src=&#39;link1_over.jpg&#39;&quot; onmouseout=&quot;this.src=&#39;link1.jpg&#39;&quot;&gt;
+         &lt;img src=&quot;link1.jpg&quot; 
+          onmouseover=&quot;this.src=&#39;link1_over.jpg&#39;&quot;
+          onmouseout=&quot;this.src=&#39;link1.jpg&#39;&quot;&gt;
       &lt;/td&gt;
       &lt;td&gt;
-         &lt;blink&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;alert(&#39;Are you sure.&#39;)&quot;&gt;Click Here&lt;/a&gt;&lt;/blink&gt;
+         &lt;blink&gt;
+         &lt;a href=&quot;javascript:void(0)&quot; 
+          onclick=&quot;alert(&#39;Are you sure.&#39;)&quot;&gt;
+            Click Here
+          &lt;/a&gt;
+        &lt;/blink&gt;
       &lt;/td&gt;
    &lt;/tr&gt;
 &lt;/table&gt;
@@ -110,7 +115,9 @@
 --&gt;
 &lt;/script&gt;
 
-&lt;img src=&quot;link1.jpg&quot; onmouseover=&quot;OnMouseOver(this, &#39;link1_over.jpg&#39;)&quot; onmouseout=&quot;OnMouseOver(this, &#39;link1.jpg&#39;)&quot;&gt;
+&lt;img src=&quot;link1.jpg&quot; 
+  onmouseover=&quot;OnMouseOver(this, &#39;link1_over.jpg&#39;)&quot;
+  onmouseout=&quot;OnMouseOver(this, &#39;link1.jpg&#39;)&quot;&gt;
 </pre>
 </section>
 
@@ -132,8 +139,10 @@
     <h2>The Not So Distant Past...</h2>
     <p>Then some hot shot designer from Kenosha who is a Bears fan edits your page...</p>
 <pre class="prettyprint">
-&lt;script src=&quot;still.js&quot;&gt;&lt;/script&gt; //oops this relied on the bears.js!
-&lt;script src=&quot;suck.js&quot;&gt;&lt;/script&gt; //and this relied on still.js working!
+&lt;script src=&quot;still.js&quot;&gt;&lt;/script&gt; 
+&lt;!--oops this relied on the bears.js!--&gt;
+&lt;script src=&quot;suck.js&quot;&gt;&lt;/script&gt; 
+&lt;!--and this relied on still.js working--&gt;
 &lt;script src=&quot;the.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;bears.js&quot;&gt;&lt;/script&gt;
 </pre>
@@ -141,21 +150,19 @@
 </section>
 
 <section class="slide">
-    <h2>The era of the script loader...</h2>
+    <h2>Script Loaders!</h2>
     <ul>
         <li>HeadJS - <a href="http://headjs.com" target="_blank">http://headjs.com</a></li>
         <li>LABjs - <a href="http://labjs.com" target="_blank">http://labjs.com</a></li>
     </ul>
-    <pre class="prettyprint">
-head.js("/path/to/jquery.js", "/google/analytics.js", "/js/site.js", function() {
-   // all done
-});
+    <pre class="prettyprint">head.js("/path/to/jquery.js", 
+        "jquery.plugin.js",
+        "/js/site.js");
 </pre>
 <pre class="prettyprint">
-$LAB.script("framework.js").wait()
-   .script("plugin.framework.js")
-   .script("myplugin.framework.js").wait()
-   .script("init.js").wait();
+$LAB.script("/path/to/jquery.js")
+  .script("jquery.plugin.js").wait()
+  .script("/js/site.js");
 </pre>
 </section>
 
@@ -179,7 +186,8 @@ $LAB.script("framework.js").wait()
         &lt;title&gt;Awesomr Stuff&lt;/title&gt;
         &lt;script 
             data-main=&quot;scripts/main.js&quot; 
-            src=&quot;scripts/require.js&quot;&gt;&lt;/script&gt;
+            src=&quot;scripts/require.js&quot;&gt;
+       &lt;/script&gt;
     &lt;/head&gt;
     &lt;body&gt;
         ...
@@ -250,11 +258,12 @@ define( &#39;navView&#39;,
          &#39;backbone&#39;
       ],
       function( $, _, Backbone){
-         var navView = Backbone.View.extend( {
+        var NavView = 
+          Backbone.View.extend( {
             ...
          } );
 
-         return navView;
+         return NavView;
       }
 );
 </pre>
@@ -310,7 +319,6 @@ require( [ &#39;app&#39; ], function( app ){
         <li class="slide">paths - mappings to modules not directly under the base URL</li>
         <li class="slide">shim - add support for libraries that do not use the define function</li>
         <li class="slide">config - An object of configuration variables that other modules can access via config( 'prop' )</li>
-        <li class="slide">waitSeconds - The number of seconds to wait before running the data-main module.</li>
         <li class="slide">deps - Files that should be loaded after the confg has been set (usually your main.js file).</li>
     </ul>
 </section>
@@ -320,21 +328,22 @@ require( [ &#39;app&#39; ], function( app ){
 <pre class="prettyprint">
 require.config( {
    baseUrl : &#39;&#39;,
-   paths : { },
-   shim: { }, //added in RequireJS 2.1
-   config : {},
-   waitSeconds : 7,
-   deps : []
+   paths : { 'jquery', 'vendor/jquery-1.9.1.js'},
+   shim: { ... }, //added in RequireJS 2.1
+   config : { version : '0.9.1'},
+   deps : [ 'main' ]
 } );
 </pre>
     <p>To see all config options go to the require website: <a href="http://requirejs.org/docs/api.html#config" target="_blank">requirejs.org</a></p>
 </section>
 
 <section class="slide">
-    <h2>Common Pattern For Config</h2>
+    <h2>Common Config</h2>
     <p>index.html</p>
 <pre class="prettyprint">
-&lt;script data-main=&quot;config.js&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
+&lt;script 
+  data-main=&quot;config.js&quot; 
+  src=&quot;require.js&quot;&gt;&lt;/script&gt;
 </pre>
     <p>config.js</p>
 <pre class="prettyprint">
@@ -400,8 +409,8 @@ shim : {
 <section class="slide">
   <h2>Exporting Your Library</h2>
   <p>From the Lo-Dash source code:</p>
-<pre class="prettyprint">
-  if (typeof define == &#39;function&#39; &amp;&amp; typeof define.amd == &#39;object&#39; &amp;&amp; define.amd) {
+<pre class="prettyprint">if (typeof define == &#39;function&#39; &amp;&amp;
+    typeof define.amd == &#39;object&#39; &amp;&amp; define.amd) {
 
     window._ = lodash;
     
@@ -415,12 +424,12 @@ shim : {
 <section class="slide">
    <h2>Require Plugins</h2>
    <ul>
-      <li>domReady - exactly what it says</li>
-      <li>text - load dependencies as plain text (for templating)</li>
-      <li>cs - loads coffeescript files</li>
-      <li>Templating Libraries</li>
+      <li class="slide">domReady - exactly what it says</li>
+      <li class="slide">text - load dependencies as plain text (for templating)</li>
+      <li class="slide">cs - loads coffeescript files</li>
+      <li class="slide">Templating Libraries</li>
    </ul>
-   <p>
+   <p class="slide">
     <a href="https://github.com/jrburke/requirejs/wiki/Plugins" target="_blank">https://github.com/jrburke/requirejs/wiki/Plugins</a>
    </p>
 </section>
@@ -448,13 +457,16 @@ require(
 <section class="slide">
     <h2>Best Practice</h2>
     <h3>One Module Per File</h3>
-<pre class="prettyprint">
-&lt;script&gt;
-   define( &#39;userModel&#39; , [ &#39;underscore&#39;, &#39;backbone&#39; ], function(){
+<pre class="prettyprint">&lt;script&gt;
+   define( &#39;userModel&#39; , 
+          [ &#39;underscore&#39;, &#39;backbone&#39; ], 
+          function(){
       ...
    } );
 
-   define( &#39;userView&#39; , [ &#39;userModel&#39;, &#39;underscore&#39;, &#39;backbone&#39; ], function(){
+   define( &#39;userView&#39; , 
+         [ &#39;userModel&#39;, &#39;underscore&#39;, &#39;backbone&#39; ], 
+         function(){
       ...
    } );
 &lt;/script&gt;
@@ -462,18 +474,51 @@ require(
 </section>
 
 <section class="slide">
+    <h2>Better</h2>
+    <h4>userModel.js</h4>
+<pre class="prettyprint">define( &#39;userModel&#39; , 
+  [ &#39;underscore&#39;, &#39;backbone&#39; ], 
+    function(){
+      ...
+} );
+</pre>
+  <h4>userView.js</h4>
+<pre class="prettyprint">define( &#39;userView&#39; , 
+  [ &#39;userModel&#39;, &#39;underscore&#39;, &#39;backbone&#39; ], 
+    function(){
+      ...
+} );
+</pre>
+</section>
+
+<section class="slide">
     <h2>Best Practice</h2>
     <h3>Give Modules ID's</h3>
-    <p>When using anonymous modules (aka modules with no ID) its easy to break your project by renaming it.</p>
+    <p>When using anonymous modules (aka modules with no ID) modules can become brittle.</p>
 <p>a.js</p>
 <pre class="prettyprint">
 define( [ &#39;b&#39; ], function(){
    ...
 } );
 </pre>
-<p>When a.js becomes appView.js the following module breaks.</p>
+<p>If a.js gets renamed the following module breaks.</p>
 <pre class="prettyprint">
 define( [ &#39;a&#39; ], function(){
+   ...
+} );
+</pre>
+</section>
+
+<section class="slide">
+    <h2>Better</h2>
+<p>a.js</p>
+<pre class="prettyprint">
+define( 'a', [ &#39;b&#39; ], function(){
+   ...
+} );
+</pre>
+<pre class="prettyprint">
+define( 'b',  [ &#39;a&#39; ], function(){
    ...
 } );
 </pre>
@@ -483,13 +528,11 @@ define( [ &#39;a&#39; ], function(){
     <h2>Watch Out!</h2>
     <h3>Circular Dependencies</h3>
     <p>One module has a dependency on a module that has a dependency on it.</p>
-    <p>a.js</p>
 <pre class="prettyprint">
 define( 'a', [ &#39;b&#39; ], function(){
    ...
 } );
 </pre>
-    <p>b.js</p>
 <pre class="prettyprint">
 define('b', [ &#39;a&#39; ], function(){
    ...
@@ -560,7 +603,7 @@ node r.js -o build.js
 
 
 <section class="slide">
-    <h2>Build For Multi Page Site</h2>
+    <h2>Multi Page Site Build</h2>
 <pre class="prettyprint">
 ({
    modules: [
@@ -568,7 +611,6 @@ node r.js -o build.js
     {
       name: &#39;../common&#39;,
       include: [&#39;jquery&#39;,
-         &#39;app/lib&#39;,
          &#39;app/controller/Base&#39;,
          &#39;app/model/Base&#39;]
     },
@@ -592,11 +634,13 @@ node r.js -o build.js
    <h2>Build For Multi Page Site</h2>
    <p>Page 1</p>
 <pre class="prettyprint">
-   &lt;script data-main=&quot;js/page1&quot; src=&quot;js/lib/require.js&quot;&gt;&lt;/script&gt;
+   &lt;script data-main=&quot;js/page1&quot; 
+    src=&quot;js/lib/require.js&quot;&gt;&lt;/script&gt;
 </pre>
 <p>Page 2</p>
 <pre class="prettyprint">
-   &lt;script data-main=&quot;js/page2&quot; src=&quot;js/lib/require.js&quot;&gt;&lt;/script&gt;
+   &lt;script data-main=&quot;js/page2&quot; 
+    src=&quot;js/lib/require.js&quot;&gt;&lt;/script&gt;
 </pre>
 </section>
 
@@ -640,13 +684,13 @@ require([&#39;./common&#39;], function (common) {
     <h4 class="warn">Warning! The spec is still in process</h4>
     <p>3 new keywords</p>
     <ul>
-        <li>
+        <li class="slide">
             <code class="prettyprint">module</code>
         </li>
-        <li>
+        <li class="slide">
             <code class="prettyprint">import</code>
         </li>
-        <li>
+        <li class="slide">
             <code class="prettyprint">export</code>
         </li>
     </ul>
@@ -686,7 +730,7 @@ module carFactory{
 <pre class="prettyprint">
 module fusion{
     
-   import ford from car;
+   import ford from carFactory;
 
    var model = &#39;Fusion&#39;;
 
@@ -695,6 +739,17 @@ module fusion{
    }
 }
 </pre>
+</section>
+
+<section class="slide">
+  <h2>Traceur</h2>
+  <h3>You can use ECMAScript.Harmony code today!</h3>
+  <p>Google's Traceur compiler compiles Harmony code to ECMAScript 5 code!</p>
+  <ul>
+    <li class="slide"><a href="https://code.google.com/p/traceur-compiler/" target="_blank">https://code.google.com/p/traceur-compiler/</a></li>
+    <li class="slide"><a href="http://blog.bittersweetryan.com/2013/02/playing-with-ecmascriptharmony-modules.html" target="_blank">Playing with ECMAScript.Harmony Modules using Traceur</a></li>
+    <li class="slide"><a href="http://traceur-compiler.googlecode.com/git/demo/repl.html" target="_blank">Online Compiler</a></li>
+  </ul>
 </section>
 
 <section class="slide">
