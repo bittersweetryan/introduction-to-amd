@@ -124,14 +124,16 @@
 <section class="slide">
     <h2>The Not So Distant Past...</h2>
 <pre class="prettyprint">
-&lt;script src=&quot;da.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;bears.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;still.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;suck.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;so.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;do.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;the.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;cubs.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;da.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;bears.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;still.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;suck.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;so.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;do.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;the.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;cubs.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </pre>
 </section>
 
@@ -228,7 +230,7 @@ $LAB.script("/path/to/jquery.js")
 define( &lt; id, &gt; &lt; [ dependencies ], &gt; factory );
 </pre>
     <ul>
-        <li><strong>id</strong> &lt;string&gt; - The optional ID to be assigned to the module.  If no ID is passed will be the name of the .js file.</li>
+        <li><strong>id</strong> &lt;string&gt; - The optional ID to be assigned to the module.</li>
         <li><strong>dependencies</strong> &lt;array literal&gt; - The optional list of dependencies.</li>
         <li><strong>factory</strong> &lt;function&gt; - The function that initiates your module.  Whatever the factory returns is assigned to the module</li>
     </ul>
@@ -244,7 +246,7 @@ define( function( ){
 </pre>
     <ul>
         <li>No dependencies</li>
-        <li>No id, module id will be the script name minus the .js</li>
+        <li>No id</li>
     </ul>
 </section>
 
@@ -494,8 +496,8 @@ define( &#39;userView&#39; ,
 </section>
 
 <section class="slide">
-    <h2>Watch Out!</h2>
-    <h3>Configure paths when using modules with ID's</h3>
+    <h2>Be careful when using ID's</h2>
+    <h4>Module with an id not in main app directory.</h4>
 <p>views/appView.js</p>
 <pre class="prettyprint">define( 'appView', [], function(){
 } );
@@ -504,6 +506,22 @@ define( &#39;userView&#39; ,
 <pre class="prettyprint">{
     paths : {
         'appView' : 'views/AppView'
+    }
+}
+</pre>
+</section>
+
+<section class="slide">
+    <h2>Be careful when using ID's</h2>
+    <h4>ID not the same as js file name.</h4>
+<p>appView.js</p>
+<pre class="prettyprint">define( 'app-view', [], function(){
+} );
+</pre>
+<p>config.js</p>
+<pre class="prettyprint">{
+    paths : {
+        'app-view' : 'appView'
     }
 }
 </pre>
@@ -553,6 +571,7 @@ define('b', [ &#39;a&#39; ], function(){
    <ul>
       <li class="slide">baseUrl - the base url for your scripts, in relation to build.js or the current working directory if using CLI.</li>
       <li class="slide">out - the output name for the optimized file</li>
+      <li class="slide">name - name of your apps entry point (data-main)</li>
       <li class="slide">paths - paths to non AMD libraries (copy from your app config)</li>
       <li class="slide">shim - load dependencies for non AMD libraries</li>
       <li class="slide">optimize - none | uglify | closure</li>
