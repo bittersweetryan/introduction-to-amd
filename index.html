@@ -252,11 +252,11 @@ define( function( ){
     <h2>A More Useful Example</h2>
 <pre class="prettyprint">
 define( &#39;navView&#39;,
-      [
-         &#39;jquery&#39;,
-         &#39;underscore&#39;,
-         &#39;backbone&#39;
-      ],
+      [ &#39;jquery&#39;,
+        &#39;underscore&#39;,
+        &#39;backbone&#39;,
+        &#39;models/user&#39; ],
+        
       function( $, _, Backbone){
         var NavView = 
           Backbone.View.extend( {
@@ -496,34 +496,7 @@ define( &#39;userView&#39; ,
 <section class="slide">
     <h2>Best Practice</h2>
     <h3>Give Modules ID's</h3>
-    <p>When using anonymous modules (aka modules with no ID) modules can become brittle.</p>
-<p>a.js</p>
-<pre class="prettyprint">
-define( [ &#39;b&#39; ], function(){
-   ...
-} );
-</pre>
-<p>If a.js gets renamed the following module breaks.</p>
-<pre class="prettyprint">
-define( [ &#39;a&#39; ], function(){
-   ...
-} );
-</pre>
-</section>
-
-<section class="slide">
-    <h2>Better</h2>
-<p>a.js</p>
-<pre class="prettyprint">
-define( 'a', [ &#39;b&#39; ], function(){
-   ...
-} );
-</pre>
-<pre class="prettyprint">
-define( 'b',  [ &#39;a&#39; ], function(){
-   ...
-} );
-</pre>
+    <p>When using anonymous modules (aka modules with no ID) some build tools may break your AMD application.</p>
 </section>
 
 <section class="slide">
