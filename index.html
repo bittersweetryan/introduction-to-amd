@@ -178,7 +178,6 @@ $LAB.script("/path/to/jquery.js")
   <ul>
       <li class="slide">Still have to manage the dependency order manually.</li>
       <li class="slide">Need to know all of the dependencies up front</li>
-      <li class="slide">Still looks a bit messy</li>
   </ul>
 </section>
 
@@ -263,7 +262,7 @@ define( &#39;navView&#39;,
           &#39;backbone&#39;,
           &#39;models/user&#39; ],
         
-      function( $, _, Backbone){
+      function( $, _, Backbone, user ){
         var NavView = 
           Backbone.View.extend( {
             ...
@@ -362,7 +361,18 @@ require.config( {
 } );
 </pre>
 </section>
-    
+
+<section class="slide">
+  <h2>Using a CDN</h2>
+<pre class="prettyprint">
+require.config({
+    paths:{
+        &#39;jquery&#39;: &#39;http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js&#39;
+    }
+});
+</pre>
+</section>
+
 <section class="slide">
     <h1>Adding Non-AMD Libraries</h1>    
 </section>
@@ -384,17 +394,6 @@ shim : {
     exports : &#39;Backbone&#39;
   }
 }
-</pre>
-</section>
-
-<section class="slide">
-  <h2>Using a CDN</h2>
-<pre class="prettyprint">
-require.config({
-    paths:{
-        &#39;jquery&#39;: &#39;http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js&#39;
-    }
-});
 </pre>
 </section>
 
@@ -428,6 +427,10 @@ shim : {
     });
   }
 </pre>
+</section>
+
+<section class="slide">
+  <h1>Plugins</h2>
 </section>
 
 <section class="slide">
