@@ -494,9 +494,19 @@ define( &#39;userView&#39; ,
 </section>
 
 <section class="slide">
-    <h2>Best Practice</h2>
-    <h3>Give Modules ID's</h3>
-    <p>When using anonymous modules (aka modules with no ID) some build tools may break your AMD application.</p>
+    <h2>Watch Out!</h2>
+    <h3>Configure paths when using modules with ID's</h3>
+<p>views/appView.js</p>
+<pre class="prettyprint">define( 'appView', [], function(){
+} );
+</pre>
+<p>config.js</p>
+<pre class="prettyprint">{
+    paths : {
+        'appView' : 'views/AppView'
+    }
+}
+</pre>
 </section>
 
 <section class="slide">
@@ -576,6 +586,64 @@ node r.js -o build.js
 <p class="warn">In the CLI dots are viewed as property seperators!</p>
 </section>
 
+<section class="slide">
+   <h2>Multi Page Site</h2>
+   <p>Page 1</p>
+ <pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Page 1&lt;/title&gt;
+        &lt;script data-main=&quot;js/page1&quot; src=&quot;js/lib/require.js&quot;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;a href=&quot;page2.html&quot;&gt;Go to Page 2&lt;/a&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+ </pre>
+<pre class="prettyprint">
+//Load common code that includes config, then load the app logic for this page.
+require([&#39;./common&#39;], function (common) {
+    require([&#39;app/main1&#39;]);
+});
+</pre>
+</section>
+
+<section class="slide">
+    <h2>Multi Page Site</h2>
+    <p>Page 2</p>
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Page 2&lt;/title&gt;
+        &lt;script data-main=&quot;js/page2&quot; src=&quot;js/lib/require.js&quot;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;a href=&quot;page1.html&quot;&gt;Go to Page 1&lt;/a&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<pre class="prettyprint">
+//Load common code that includes config, then load the app logic for this page.
+require([&#39;./common&#39;], function (common) {
+    require([&#39;app/main2&#39;]);
+});
+</pre>
+</section>
+
+<seciton class="slide">
+    <h2>Multi Page Site</h2>
+    <p>common.js</p>
+<pre class="prettyprint">
+requirejs.config({
+    baseUrl: &#39;js/lib&#39;,
+    paths: {
+        app: &#39;../app&#39;
+    }
+}); 
+</pre>
+</seciton>
 
 <section class="slide">
     <h2>Multi Page Site Build</h2>
@@ -606,33 +674,13 @@ node r.js -o build.js
 </section>
 
 <section class="slide">
-   <h2>Build For Multi Page Site</h2>
-   <p>Page 1</p>
-<pre class="prettyprint">
-   &lt;script data-main=&quot;js/page1&quot; 
-    src=&quot;js/lib/require.js&quot;&gt;&lt;/script&gt;
-</pre>
-<p>Page 2</p>
-<pre class="prettyprint">
-   &lt;script data-main=&quot;js/page2&quot; 
-    src=&quot;js/lib/require.js&quot;&gt;&lt;/script&gt;
-</pre>
-</section>
-
-<section class="slide">
-   <h2>Build For Multi Page Site</h2>
-   <p>page1.js</p>
-<pre class="prettyprint">
-require([&#39;./common&#39;], function (common) {
-   require([&#39;app/main1&#39;]);
-});
-</pre>
-   <p>page2.js</p>
-<pre class="prettyprint">
-require([&#39;./common&#39;], function (common) {
-   require([&#39;app/main2&#39;]);
-});
-</pre>
+    <h2>Multi Page Site Build</h2>
+    <p2>After the build:</p2>
+    <ul>
+        <li class="slide">common.js will include all your libraries</li>
+        <li class="slide">page1.js will include all modules for page 1</li>
+        <li class="slide">page2.js will include all modules for page 2</li>
+    </ul>
 </section>
 
 <section class="slide">
@@ -645,7 +693,7 @@ require([&#39;./common&#39;], function (common) {
         <li class="slide">Unit testing can be a pain! Lacking good ways to mock and stub.</li>
     </ul>
     <p class="slide">
-    <a href="http://tomdale.net/2012/01/amd-is-not-the-answer/">Why AMD is Not the Answer</a> by  Tom Dale, one of the Ember.js creators.
+    <a href="http://tomdale.net/2012/01/amd-is-not-the-answer/" target="_blank">Why AMD is Not the Answer</a> by  Tom Dale, one of the Ember.js creators.
     </p>
 </section>
 
@@ -719,12 +767,10 @@ module fusion{
 <section class="slide">
   <h2>Traceur</h2>
   <h3>You can use ECMAScript.Harmony code today!</h3>
-  <p>Google's Traceur compiler compiles Harmony code to ECMAScript 5 code!</p>
-  <ul>
-    <li class="slide"><a href="https://code.google.com/p/traceur-compiler/" target="_blank">https://code.google.com/p/traceur-compiler/</a></li>
-    <li class="slide"><a href="http://blog.bittersweetryan.com/2013/02/playing-with-ecmascriptharmony-modules.html" target="_blank">Playing with ECMAScript.Harmony Modules using Traceur</a></li>
-    <li class="slide"><a href="http://traceur-compiler.googlecode.com/git/demo/repl.html" target="_blank">Online Compiler</a></li>
-  </ul>
+  <h4>Google's Traceur compiler compiles Harmony code to ECMAScript 5 code!</h4>
+  <p>Project home page: <a href="https://code.google.com/p/traceur-compiler/" target="_blank">https://code.google.com/p/traceur-compiler/</a></p>
+  <p>Online Compiler: <a href="http://traceur-compiler.googlecode.com/git/demo/repl.html" target="_blank">http://traceur-compiler.googlecode.com/git/demo/repl.html</a></p>
+  <p>Playing with Harmony Modules and Traceur: <a href="http://blog.bittersweetryan.com/2013/02/playing-with-ecmascriptharmony-modules.html" target="_blank">http://blog.bittersweetryan.com/2013/02/playing-with-ecmascriptharmony-modules.html</a></p>
 </section>
 
 <section class="slide">
