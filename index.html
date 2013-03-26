@@ -108,16 +108,20 @@
     <h2>The Middle...</h2>
 <pre class="prettyprint">
 &lt;script type=&quot;text/javascript&quot; &gt;
-&lt;!--
    function OnMouseOver(image, newSrc){
       image.src = newSrc;
    }
---&gt;
+   
+   var ele = document.getElementById( 'myImage' );
+   
+   if(document.attachEvent){
+     ele.attachEvent( 'click', ...);
+   }
+   else{
+    ele.addEventListener( 'click', ...);
+   }
+   
 &lt;/script&gt;
-
-&lt;img src=&quot;link1.jpg&quot; 
-  onmouseover=&quot;OnMouseOver(this, &#39;link1_over.jpg&#39;)&quot;
-  onmouseout=&quot;OnMouseOver(this, &#39;link1.jpg&#39;)&quot;&gt;
 </pre>
 </section>
 
