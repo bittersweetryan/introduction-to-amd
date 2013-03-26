@@ -170,9 +170,9 @@ $LAB.script("/path/to/jquery.js")
     <h2>Script Loaders Are Great But...</h2>
 
   <ul>
-      <li>Still have to manage the dependency order manually.</li>
-      <li>Need to know all of the dependencies up front</li>
-      <li>Still looks a bit messy</li>
+      <li class="slide">Still have to manage the dependency order manually.</li>
+      <li class="slide">Need to know all of the dependencies up front</li>
+      <li class="slide">Still looks a bit messy</li>
   </ul>
 </section>
 
@@ -183,7 +183,7 @@ $LAB.script("/path/to/jquery.js")
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;title&gt;Awesomr Stuff&lt;/title&gt;
+        &lt;title&gt;Awesome Stuff&lt;/title&gt;
         &lt;script 
             data-main=&quot;scripts/main.js&quot; 
             src=&quot;scripts/require.js&quot;&gt;
@@ -280,7 +280,7 @@ define( &#39;navView&#39;,
             Open Source AMD Loader
         </li>
         <li>
-            Written and maintained by James Burke (Dojo, Firefox)
+            Written by James Burke (Dojo, Mozilla)
         </li>
         <li>
             > 3000 "Stargazers" on GitHub
@@ -295,7 +295,9 @@ define( &#39;navView&#39;,
     <h2>RequireJS</h2>
     <h3>The Simplest Implementation.</h3>
 <pre class="prettyprint">
-&lt;script data-main=&quot;main.js&quot; src=&quot;require.js&quot;&gt;&lt;/script&gt;
+&lt;script 
+  data-main=&quot;main.js&quot; 
+  src=&quot;require.js&quot;&gt;&lt;/script&gt;
 </pre>
    <p>The <code>data-main</code> attribute tells require to run the main.js to initialize the application.</p>
 </section>
@@ -305,10 +307,11 @@ define( &#39;navView&#39;,
 <pre class="prettyprint">
 require( [ &#39;app&#39; ], function( app ){
 
-   app.init( );
+  app.init( );
+
 } );
 </pre>
-    <p>The <code>require</code> function is used as a shortcut by RequireJS when a script has no exports.</p>
+    <p>The <code>require</code> function is used as a shortcut by RequireJS when a script has no exports. The AMD spec defines that the require function is optional for an AMD loader to implement.</p>
     <p>app.js can have its own dependencies that will be resolved when it is included into main script.</p>
 </section>
 
@@ -457,19 +460,18 @@ require(
 <section class="slide">
     <h2>Best Practice</h2>
     <h3>One Module Per File</h3>
-<pre class="prettyprint">&lt;script&gt;
-   define( &#39;userModel&#39; , 
-          [ &#39;underscore&#39;, &#39;backbone&#39; ], 
-          function(){
-      ...
-   } );
+<pre class="prettyprint">
+define( &#39;userModel&#39; , 
+  [ &#39;underscore&#39;, &#39;backbone&#39; ], 
+  function(){
+    ...
+} );
 
-   define( &#39;userView&#39; , 
-         [ &#39;userModel&#39;, &#39;underscore&#39;, &#39;backbone&#39; ], 
-         function(){
-      ...
-   } );
-&lt;/script&gt;
+define( &#39;userView&#39; , 
+  [ &#39;userModel&#39;, &#39;underscore&#39;, &#39;backbone&#39; ], 
+  function(){
+    ...
+} );
 </pre>
 </section>
 
@@ -478,15 +480,15 @@ require(
     <h4>userModel.js</h4>
 <pre class="prettyprint">define( &#39;userModel&#39; , 
   [ &#39;underscore&#39;, &#39;backbone&#39; ], 
-    function(){
-      ...
+  function(){
+    ...
 } );
 </pre>
   <h4>userView.js</h4>
 <pre class="prettyprint">define( &#39;userView&#39; , 
   [ &#39;userModel&#39;, &#39;underscore&#39;, &#39;backbone&#39; ], 
-    function(){
-      ...
+  function(){
+    ...
 } );
 </pre>
 </section>
@@ -549,7 +551,7 @@ define('b', [ &#39;a&#39; ], function(){
     <ul>
         <li>Combines and minifies .js files</li>
         <li>Optimizes CSS</li>
-        <li>Traces your application and optimizes all of the dependencies.</li>
+        <li><strong>Traces your application and optimizes all of the dependencies.</strong></li>
     </ul>
 </section>
 
@@ -663,13 +665,13 @@ require([&#39;./common&#39;], function (common) {
 <section class="slide">
     <h2>Why not AMD?</h2>
     <ul>
-        <li>Dependencies are defined as strings.</li>
-        <li>Without a build process encourages many http requests.</li>
-        <li>Extra Markup</li>
-        <li>Not compatible with Harmony Modules</li>
-        <li>Unit testing sucks! Lacking good ways to mock and stub.</li>
+        <li class="slide">Dependencies are defined as strings.</li>
+        <li class="slide">Without a build process encourages many http requests.</li>
+        <li class="slide">Extra Markup</li>
+        <li class="slide">Not compatible with Harmony Modules</li>
+        <li class="slide">Unit testing can be a pain! Lacking good ways to mock and stub.</li>
     </ul>
-    <p>
+    <p class="slide">
     <a href="http://tomdale.net/2012/01/amd-is-not-the-answer/">Why AMD is Not the Answer</a> by  Tom Dale, one of the Ember.js creators.
     </p>
 </section>
