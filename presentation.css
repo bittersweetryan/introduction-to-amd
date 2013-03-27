@@ -11,8 +11,24 @@
 	left: 0;
 }
 
-#subtitle{
+#subtitle {
 	text-align: center;
-	margin-top: 60%;
+	bottom: 20px;
+	position: fixed;
+	width: 100%;
+}
+
+#subtitle h4 {
+	margion: 0 auto;
 	position: relative;
+}
+
+.warn{
+	color: red;
+}
+
+span.quote{
+	color: #888;
+	font-weight: bold;
+	font-size: 1.4em;
 }
