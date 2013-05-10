@@ -35,12 +35,23 @@
 <!-- Begin slides. Just make elements with a class of slide. -->
 
 <section class="slide">
+  <ul>
+    <li>Turn off IM</li>
+    <li>Water</li>
+    <li>Turn off extensions</li>
+    <li>Speak slowly and clearly</li>
+  </ul>
+</section>
+
+<section class="slide">
     <h1>AMD &amp; RequireJS</h1>
     
     <div class="amd-title">
-        <div id="subtitle">
-        </div>
     </div>
+    <div id="subtitle">
+            <h4 class="link">http://bittersweetryan.github.com/introduction-to-amd</h4>
+            <h4>cf.Objective() 2013</h4>
+        </div>
 </section>
 
 <section class="slide">
@@ -133,7 +144,7 @@
 
 <section class="slide">
     <h2>The Not So Distant Past...</h2>
-    <p>Then some hot shot designer from Kenosha who is a Bears fan edits your page...</p>
+    <p>Then some hot shot designer who is a Bears fan edits your page...</p>
 <pre class="prettyprint">
 &lt;script src=&quot;still.js&quot;&gt;&lt;/script&gt; 
 &lt;!--oops this relied on the bears.js!--&gt;
@@ -262,6 +273,76 @@ define( &#39;navView&#39;,
       }
 );
 </pre>
+</section>
+
+<section class="slide">
+  <h2>Thinking Modular</h2>
+  <h6>More Modular</h6>
+  <pre class='prettyprint'>require( [ 'calendar', function( cal ){
+
+ $( '#addEvent' ).on( 'click', cal.addEvent );
+ 
+ $( '#events' ).on( 'click', '.viewEvent', cal.viewEvent)
+ .on( 'click', 'delete', cal.deleteEvent ); 
+} );</pre>
+</section>
+
+<section class="slide">
+  <h2>Thinking Modular</h2>
+  <h6>Typical jQuery code</h6>
+  <pre class="prettyprint">$( function(){
+  
+  $( '#addEvent' ).on( 'click', function(){
+     //add a event
+  });
+  
+  $( '#events' ).on( 'click', '.viewEvent', function(){
+    //show the event
+  })
+  .on( 'click', 'delete', function(){
+    //delete the event
+  });
+
+  function validateEntry(){
+    //validate
+  }
+
+});</pre>
+</section>
+
+<section class="slide">
+  <h2>Thinking Modular</h2>
+  <h6>More Modular</h6>
+  <pre class="prettyprint">define( 'calendar', function(){
+  
+  var calendar = {
+    addEvent : function(){
+    },
+    viewEvent : function(){
+    },
+    deleteEvent : function(){
+    },
+    validateEvent : function(){
+    }
+  };
+  
+  return {
+    addEvent : calendar.addEvent,
+    editEvent : calendar.editEvent,
+    deleteEvent : calendar.deleteEvent
+  };
+});</pre>
+</section>
+
+<section class="slide">
+    <h2>Thinking Modular</h2>
+    <h6>A good module...</h6>
+    <ul>
+        <li class="slide">Has a single responsibility</li>
+        <li class="slide">Exposes a single unit of work</li>
+        <li class="slide">Should be a small consumable chunk of functionality</li>
+    </ul>
+    <p class="slide">The more modules you write, the better you'll become at determining what belongs in a module.</p>
 </section>
 
 <section class="slide">
@@ -852,22 +933,5 @@ module fusion{
         $.deck('.slide');
     });
 </script>
-
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-2411698-13']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-
 </body>
 </html>
-Window size: x 
-Viewport size: x
