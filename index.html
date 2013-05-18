@@ -104,13 +104,13 @@
 </pre>
 <p>Confession: I used to write code like this on my IBM Aptiva while watching the Fresh Prince of Bel Air.</p>
 </section>
-
+<!--
 <section class="slide">
   <div class="vcenter">
     <img src="images/not_impressed.jpg">
   </div>
 </section>
-
+-->
 <section class="slide">
     <h2>The Middle...</h2>
 <pre class="prettyprint">
@@ -131,13 +131,13 @@
 &lt;/script&gt;
 </pre>
 </section>
-
+<!--
 <section class="slide">
   <div class="vcenter">
     <img src="images/not_impressed.jpg">
   </div>
 </section>
-
+-->
 <section class="slide">
     <h2>The Not So Distant Past...</h2>
 <pre class="prettyprint">
@@ -168,13 +168,13 @@
 </pre>
     <p>And breaks EVERYTHING!</p>
 </section>
-
+<!--
 <section class="slide">
   <div class="vcenter">
     <img src="images/grumpy_cat.jpg">
   </div>
 </section>
-
+-->
 <section class="slide">
     <h2>Script Loaders!</h2>
     <ul>
@@ -296,6 +296,18 @@ define( &#39;navView&#39;,
 </section>
 
 <section class="slide">
+    <h2>Thinking Modular</h2>
+    <h6>A good module...</h6>
+    <ul>
+        <li class="slide">Has a single responsibility</li>
+        <li class="slide">Exposes a single unit of work</li>
+        <li class="slide">Should be a small consumable chunk of functionality</li>
+        <li class="slide">Does not mix concerns</li>
+    </ul>
+    <p class="slide">The more modules you write, the better you'll become at determining what belongs in a module.</p>
+</section>
+
+<section class="slide">
   <h2>Thinking Modular</h2>
   <h6>Typical jQuery code</h6>
   <pre class="prettyprint">$( function(){
@@ -349,26 +361,13 @@ define( &#39;navView&#39;,
 
  $( '#addEvent' ).on( 'click', cal.addEvent );
  
- $( '#events' ).on( 'click', '.viewEvent', cal.viewEvent)
- .on( 'click', 'delete', cal.deleteEvent ); 
+ $( '#events' )
+    .on( 'click', '.viewEvent', cal.viewEvent)
+    .on( 'click', 'delete', cal.deleteEvent ); 
+    
 } );</pre>
 </section>
 
-
-
-
-
-<section class="slide">
-    <h2>Thinking Modular</h2>
-    <h6>A good module...</h6>
-    <ul>
-        <li class="slide">Has a single responsibility</li>
-        <li class="slide">Exposes a single unit of work</li>
-        <li class="slide">Should be a small consumable chunk of functionality</li>
-        <li class="slide">Does not mix concerns</li>
-    </ul>
-    <p class="slide">The more modules you write, the better you'll become at determining what belongs in a module.</p>
-</section>
 
 <section class="slide">
     <h1>RequireJS </h1>
